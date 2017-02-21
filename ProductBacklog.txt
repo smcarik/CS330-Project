@@ -1,0 +1,111 @@
+Product Backlog
+
+As a User I want to be able add developers to a project so that they can all see the scrum board of the current project.
+
+As a User I want to be able to have my own login credentials so that I can have my own account.
+
+**As a User I want to be able to remove people from projects so that we can continue building software efficiently in case a developer isn’t meeting requirements.
+
+As a User I want to be able to change my password so that I can keep my account secure.
+
+As a user I want to be able to be able to create an account so that I can join projects.
+
+As a User I want to be able to view a tab of all projects i'm associated with so that i can keep track of which projects i am working on.
+
+As a User I want to be able to view team members associated to a project, so  that i can see who my colleagues are.
+
+As a User I want to be able to view projects invites so that I can join projects.
+
+----development progress usage----
+
+As a user I want to be able to interact graphically with the scrumboard management software so that I can visualize my session progress.
+
+As a User I want to be able to save my current session progress to the database so that I can save my scrum board successfully in the database.
+
+As a User I want to be able to access past snapshots of the project so that i can revert back to an old save.
+
+As user i want to be able to add time weights to user stories so that we can give the product owner a time frame on when the sprint will be done
+
+As a user  i want to have 5 pre created columns, backlog, sprint backlog, to do, in progress, completed so that i can track progress of project.
+
+*As a user i want to be able to add new columns so that i can add new sprints or other things i need to keep track off
+
+As a User I want to be able to move items from the product backlog to the sprint backlog so that we can plan a sprint.
+
+As a user i want to be able to 
+
+As a User I want to be able to mark tasks as done from a current sprint so that I determine completeness of current sprint
+
+As as user i want to be able to mark user stories in the sprint backlog as completed so that we can keep track of what’s already been done.
+
+As a user/product owner i want to be able to access old sprints so that i can view past information
+
+As a user i want to be able to select a user story so that i can break it down into tasks
+
+As a user i want to be able to add tasks relevant to the selected user story to the to do column so that we can create a list of what needs to be done
+
+As a user i want to be able to specify a percentage for a task so that i can see how much of the user story it represented
+
+As a user  i want to be able to assign members tasks so that they can work on it
+
+As a user i want to be able to see which user is assigned to which task so that i can keep track of the projects
+
+As a user i wan to be able to move a task from to do to in progress so that we can see whats currently being worked on
+
+As a user i want to be able to move a task from in progress to completed so that we can see whats been completed and reassign the member to a new task
+
+As a user i want to be able to view my percentage contribution to a user story so that i can see if im pulling my weight.
+
+As a user i want to be able to update the user story completed percentage so that i can track how much work has been done
+
+As a user i want to be able to mark a sprint as completed so that we can create a new sprint
+
+*As a user i want to be able to clear the task columns so that we can reuse them for a new sprint
+
+As a user i want to be able to load the most current snapshot so that i can get to work right away
+
+As a User I want to be able to view user stories from past sprints so that we can see what we have accomplished.
+
+As a User I want to be able to create a new project so that I can start a new software/project.
+
+---Message board usage---
+
+As a User I want to be able to send messages that will be viewable by everyone involved with the current scrumboard so that communication can be consistent. 
+
+As a User I want to be able to view notifications so that I can keep up to date with current project progress.
+
+As a User I want to be able to view all past messages so that I can track user interactions.
+
+---Product Owner---
+
+As a Product Owner I want to be able to reorder the product backlog so that I can place highest priority items on top.
+
+As a Product Owner I want to be able to edit the User Stories on the product backlog so that I can ensure their accuracy.
+
+As a Product Owner I want to be able to add User Stories to the product backlog so that I can keep software development relevant to my needs.
+
+As a Product Owner I want to be able to remove User Stories from the product backlog so that I can keep software development relevant to my needs.
+
+As a Product Owner I want to be able to view the current Sprint backlog so that I can keep track of the progress of the development team. 
+
+As a Product Owner I want to be able to view the saved snapshots of the scrumboard so that I can track the progress of the development team. 
+
+As a Product Owner I want to be able to view the development team roster so that I know who I am working with. 
+
+
+
+For next tuesday
+1-      Have a GUI using whatever technology you’ve decided on
+2-      Write data to a database
+3-      Read data from a database and respond with an action of some sort
+4-      Include a working test unit (whatever corresponds to JUnit in your case)
+
+ 
+QUESTIONS
+
+
+What type of information would you like each user to input/ have in their account.
+What is visible to other people
+What is required.
+Can we have team members working on different user stories or do all team members work on one user story?
+How is task percentage of a user story determined

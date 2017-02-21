@@ -2,7 +2,7 @@ Product Backlog
 
 As a User I want to be able add developers to a project so that they can all see the scrum board of the current project.
 
-As a User I want to be able to have my own login credentials so that I can have my own account.
+TOP: Number 1: As a member I can register so that I am able to use the system.
 
 **As a User I want to be able to remove people from projects so that we can continue building software efficiently in case a developer isn’t meeting requirements.
 
@@ -109,3 +109,107 @@ What is visible to other people
 What is required.
 Can we have team members working on different user stories or do all team members work on one user story?
 How is task percentage of a user story determined
+
+
+Highest priority
+
+Users to register
+  **username unique visable to everyone something that is not empty
+  **password
+  first name
+  last name
+  
+  Acceptance Criteria
+     username unique and provide a password succed
+     failure
+       non unique username
+       missing username
+       missing password
+  
+Login
+ provide username and password to log in if not denied access
+ **security**
+
+My projects
+ create a project
+   editable needs a unique project name required
+   editable decscription
+   anyone can change this
+   everyone has all access as of rn
+   member of a project is able to invite
+    existing member can not be invited to same project
+    invalid user name to invite should fail
+    
+   
+ invited to a project is automatically added to the project
+ 
+ Adding items to the backlogs
+   any user can do this but later on PO will only be able to 
+   add to the top always
+   reordering
+   edit and delete **not high priority**
+   
+   format template
+   As a ______ I want to be able to _________ so that_________.
+   
+   estimate
+     small, medium, large, etc
+     
+   BL --> SL
+     can only move things to the SL only if its high priority.
+     
+     
+
+TOP:
+Number 1: As a member I can register so that I am able to use the system.
+    Acceptance Criteria
+    username unique and provide a password succed
+    failure
+     non unique username
+     missing username
+     missing password
+     
+Number 2: As a member I am able to log in so that i am able to access my start up page
+     Acceptance Criteria
+     username and passowrd should match
+     failure
+      username invalid / empty
+      password invalid / empty
+      
+Number 2a: As a memeber i am able to view the projects I ama  member of, so that i can manage the projects and collaborate with others
+ all of the projects i am in should appear and the rest shouldnt
+
+Number 3: As a member I want to be able to make a new project so that i can start a scrum collaberation
+
+Number 4: As a member i want to be able to invite people to my project so that we can collaberate on development
+  cant invite memebr with invalid username, already in the projects, cant invite someone to a project you arent a part of
+  
+Number 5: As a memeber I want to be able to add items to the product backlog so that i can specify product requirement.
+ adds and goes to the top
+ 
+Number 6: As a member I want to be able to rearrange items in the back log so that i can emphasize higher importants requirements
+  matches the templete
+  has acceptance criteria
+  has an estimate
+  should be able to move it (only the top object)
+  failure
+   nothingin templete
+   no estimate
+   no acceptance criteria
+
+--Sprint back log--
+Number 7: As a member i want to be able to add tasks for specific user stories so that we can understand.....
+  percentage should never be > 100
+  show progres
+8: As a memeber i should be able to move the task from the todo to doing column so that we can denote progrss
+ percentage and member needed to do this
+ 
+9: as a memeber i should be able to format 
+
+10: As a member i should be able to see a % completion on a given user story in order to see progress.
+  match what is in the done.
+  
+11: As a member i should be able to save my current scrum board so that i can reffer to it later on.
+  click the save button
+  should be saved permanatly
+     able to access it later

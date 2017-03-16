@@ -1,0 +1,39 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+
+ 	<title>THIS IS A TEST</title>
+  	<meta name="description" content="Test Login for Project">
+  	<meta name="author" content="root" >
+
+	<!--[if lt IE 9]>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+ 	<![endif]-->
+ 	
+ 	 <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+	<h1>Welcome to BlazinPretzel's Test</h1>
+	<form action="test.php" method="POST" name="loginform autocomplete="OFF">
+		<table class="dataentrytable" summary="This data entry table is to be used to format user-login fields">
+			<tbody>
+				<tr>
+					<td class="delabel" scope="row"><label for="UserName"><span class="fieldlabeltext">UserName:</span></label>
+					</td>
+					<td class="dedefault"><input type="text" name="uid" size="11" maxlength="20" id="UserName">
+					</td>
+				</tr>
+				<tr>
+					<td class="delabel" scope="row"><label for="Password"><span class="fieldlabeltext">Password:</span></label>
+					</td>
+					<td class="dedefault" id="Password"><input type="password" name="pw" size="16" maxlength="20">
+					</td>
+				</tr>
+			</tbody>		
+		</table>		
+		<input type="submit" value="Login">
+	</form>
+	<p> ENTER YOUR USER NAME & PASSWORD </p>
+</body>
+</html>

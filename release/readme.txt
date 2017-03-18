@@ -1,1 +1,2 @@
 release folder
+test

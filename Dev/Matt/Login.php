@@ -1,7 +1,8 @@
 <!doctype html>
 <?php
-if(!isset($_SESSION)){
+if(!isset($_SESSION['Active'])){
 	session_start();
+	$_SESSION['Active'] = 'Active';
 	$_SESSION['Error']=null;
 }
 ?>

@@ -1,5 +1,10 @@
 <!doctype html>
-
+<?php
+if(!isset($_SESSION)){
+	session_start();
+	$_SESSION['Error']=null;
+}
+?>
 <html lang="en">
 <head>
 
@@ -15,6 +20,11 @@
 </head>
 <body>
 	<h1>Welcome to BlazinPretzel's Scrum Board</h1>
+	<?php 
+	if($_SESSION['Error']!= null){
+		echo "Error: " . $_SESSION['Error'];
+	}
+	?>
 	<form action="Login.php" method="POST" name="loginform autocomplete="OFF">
 		<table class="dataentrytable" summary="This data entry table is to be used to format user-login fields">
 			<tbody>

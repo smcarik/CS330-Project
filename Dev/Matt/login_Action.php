@@ -1,7 +1,8 @@
+<!DOCTYPE HTML> 
+<html> 
 <head>
-
-<title>Login</title>
-<link rel="stylesheet" href="styles.css">
+	<title>Login</title>
+	<link rel="stylesheet" href="styles.css">
 </head>
 <body>
 <?php
@@ -67,3 +68,4 @@ else {
 	<br>
 	<button onclick="window.location='index.html'">GO BACK</button>
 </body>
+</html>

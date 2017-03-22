@@ -19,7 +19,7 @@ try {
 			'csci330'
 			);
 	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM USerInfo WHERE USERNAME=\"" . $_POST["uid"] . "\"";
+	$sql = "SELECT * FROM UserInfo WHERE USERNAME=\"" . $_POST["uid"] . "\"";
 	if(!$sql){
 		$_SESSION['Error']='Invalid Username entered';
 		header('Location: login.php');

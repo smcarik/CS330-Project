@@ -20,7 +20,7 @@ if(!isset($_SESSION['Active'])){
 		echo "Error: " . $_SESSION['Error'];
 	}
 	?>
-	<form action="login_Action.php" method="POST" name="loginform autocomplete="OFF">
+	<form action="login_Action.php" method="POST">
 		<table>
 			<tbody>
 				<tr>
@@ -38,7 +38,7 @@ if(!isset($_SESSION['Active'])){
 	<p>
 		ENTER YOUR USER NAME & PASSWORD 
 		<br>
-		<button onclick="window.location='..../Dev2/register/index.html'">Register</button>
+		<button onclick="http://www.users.csbsju.edu/~makounniyom/Dev2/register/register.html">Register</button>
 	</p>
 </body>
 </html>

@@ -22,7 +22,7 @@ try {
 	$sql = "SELECT * FROM USerInfo WHERE USERNAME=\"" . $_POST["uid"] . "\"";
 	if(!$sql){
 		$_SESSION['Error']='Invalid Username entered';
-		header('Location: Login.php');
+		header('Location: login.php');
 	}
 	else{
 		foreach($db->query($sql) as $row) {

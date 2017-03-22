@@ -35,10 +35,12 @@ if(!isset($_SESSION['Active'])){
 		</table>		
 		<input type="submit" value="Login">
 	</form>
+	<form action="http://www.users.csbsju.edu/~makounniyom/Dev2/register/register.html">
+		<input type="submit" value="Register">
+	</form>
 	<p>
 		ENTER YOUR USER NAME & PASSWORD 
 		<br>
-		<button onclick="http://www.users.csbsju.edu/~makounniyom/Dev2/register/register.html">Register</button>
 	</p>
 </body>
 </html>

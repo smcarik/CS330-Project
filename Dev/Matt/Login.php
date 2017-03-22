@@ -1,9 +1,15 @@
 <!doctype html>
-
+<?php
+if(!isset($_SESSION['Active'])){
+	session_start();
+	$_SESSION['Active'] = 'Active';
+	$_SESSION['Error']=null;
+}
+?>
 <html lang="en">
 <head>
 
- 	<title>THIS IS A TEST</title>
+ 	<title>Login</title>
   	<meta name="description" content="Test Login for Project">
   	<meta name="author" content="root" >
 
@@ -14,8 +20,13 @@
  	 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-	<h1>Welcome to BlazinPretzel's Test</h1>
-	<form action="connect.php" method="POST" name="loginform autocomplete="OFF">
+	<h1>Welcome to BlazinPretzel's Scrum Board</h1>
+	<?php 
+	if($_SESSION['Error']!= null){
+		echo "Error: " . $_SESSION['Error'];
+	}
+	?>
+	<form action="Login.php" method="POST" name="loginform autocomplete="OFF">
 		<table class="dataentrytable" summary="This data entry table is to be used to format user-login fields">
 			<tbody>
 				<tr>

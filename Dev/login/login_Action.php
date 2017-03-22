@@ -66,6 +66,6 @@ else {
 
 ?>
 	<br>
-	<button onclick="window.location='index.html'">GO BACK</button>
+	<button onclick="window.location='login.php'">GO BACK</button>
 </body>
 </html>

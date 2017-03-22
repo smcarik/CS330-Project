@@ -38,7 +38,7 @@ if(!isset($_SESSION['Active'])){
 	<p>
 		ENTER YOUR USER NAME & PASSWORD 
 		<br>
-		<a href="http://www.users.csbsju.edu/%7Emakounniyom/register/register.html">REGISTER HERE!</a>
+		<button onclick="window.location='..../Dev2/register/index.html'">Register</button>
 	</p>
 </body>
 </html>

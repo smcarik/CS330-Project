@@ -21,7 +21,7 @@
 					'csci330'
 			);
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			$sql = "SELECT * FROM BLAZINPRETZELS_DEMO_DB";
+			$sql = "SELECT * FROM UserInfo";
 		
 			foreach($db->query($sql) as $row) {
 				if(strcmp($row["USERNAME"],$_POST["user"]) == 0) {
@@ -31,7 +31,7 @@
 			}
 
 			if(!$bool1) {
-				$sql = "INSERT INTO BLAZINPRETZELS_DEMO_DB (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $_POST["fname"]  . "\", \""  . $_POST["lname"]  . "\", \""  . $_POST["pass"]  . "\", \""  . $_POST["user"]  . "\")";
+				$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $_POST["fname"]  . "\", \""  . $_POST["lname"]  . "\", \""  . $_POST["pass"]  . "\", \""  . $_POST["user"]  . "\")";
 				$db->exec($sql);
 			}
 		} 

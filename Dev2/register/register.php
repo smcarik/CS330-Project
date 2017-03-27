@@ -15,12 +15,14 @@
 		} 
 		// Create connection
 		try { 
-			$db = new PDO(
+			$db = new DBController;
+			$db->setUpDB();
+			/* $db = new PDO(
 					'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
 					'BlazinPretzels',
 					'csci330'
 			);
-			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); */
 			$sql = "SELECT * FROM UserInfo";
 		
 			foreach($db->query($sql) as $row) {

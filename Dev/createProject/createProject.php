@@ -37,7 +37,7 @@
  				</form>
  			</fieldset>
     	</div>
-    <?php
+   <?php 
 
 	?>
     </body>

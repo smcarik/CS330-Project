@@ -1,5 +1,5 @@
 <?php
-include __DIR__.'\..\Controllers\DBController.php';
+include __DIR__.'/../Controllers/DBController.php';
 /* 
  * start off with class <class name> extends PHPUnit_Framework_TestCase
  * 

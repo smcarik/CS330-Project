@@ -7,7 +7,17 @@
     <body>
     
     <?php
-
+    	$projectNameUsed =false;
+	    try {
+	    	$db = new ContactDB;
+	    	$db->setUpDB();
+	    	$newProjectName = $_POST["projName"];
+	    	$newProjectDescription = $_POST["projDesc"];
+	    	$db->addIfUnique($newProjectName, $newProjectDescription);
+	    }
+	    catch(PDOException $e) {
+	    	echo "Connection Failed: " . $e->getMessage();
+	    }
 	?>
     </body>
 </html>

@@ -1,4 +1,5 @@
 <?php
+include __DIR__.'\..\Controllers\DBController.php';
 /* 
  * start off with class <class name> extends PHPUnit_Framework_TestCase
  * 
@@ -7,6 +8,7 @@
  * 				<test<test description>>()
  */
 class testPhpUnit extends PHPUnit_Framework_TestCase {
+	
 	Public function test() {
 		$this->assertTrue(true);
 		$this->assertTrue(5==5);
@@ -27,6 +29,17 @@ class testPhpUnit extends PHPUnit_Framework_TestCase {
 	
 	public function testdoesTestMatter(){
 		$this->assertFalse(5==4);
+	}
+	
+	public function testDbconn(){
+		try{
+		$db = new ContactDB;
+		$db->setUpDB();
+		$this->assertTrue($db!=null);
+		}
+		catch(PDOException $e) {
+			echo "Connection Failed: " . $e->getMessage();
+		}
 	}
 }
 

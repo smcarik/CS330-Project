@@ -54,7 +54,7 @@ elseif($bool2) {
 	echo "<h1>Invalid password.</h1>";
 } 
 else {
-	header('Location: /../UserHomePage/userHomePage.php');
+	header('Location: /CS330-Project/UserHomePage/userHomePage.php');
 	/* echo "<h1> Hello, " . $fname . " " . $lname . ". Welcome Back! </h1>";
 	echo "<p>";
 	echo "<br> Your account information is as follows!";

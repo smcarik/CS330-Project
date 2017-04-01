@@ -35,7 +35,7 @@ if(!isset($_SESSION['Active'])){
 		</table>		
 		<input type="submit" value="Login">
 	</form>
-	<form action="/../register/register.html">
+	<form action="/CS330-Project/register/register.html">
 		<input type="submit" value="Register">
 	</form>
 	<p>

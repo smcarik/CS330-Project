@@ -5,6 +5,7 @@
 </head>
 <body>
 	<?php
+		include __DIR__.'\..\Controllers\DBController.php';
 		$bool1 = false;
 		$cnt = 0;
 		if((strcmp("",$_POST["user"]) == 0) or (strcmp("",$_POST["lname"]) == 0) or (strcmp("",$_POST["fname"]) == 0) or (strcmp("",$_POST["pass"]) == 0)) {
@@ -15,7 +16,7 @@
 		} 
 		// Create connection
 		try { 
-			$db = new DBController;
+			$db = new ContactDB;
 			$db->setUpDB();
 			/* $db = new PDO(
 					'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
@@ -24,18 +25,18 @@
 			);
 			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); */
 			$sql = "SELECT * FROM UserInfo";
-		
-			foreach($db->query($sql) as $row) {
-				if(strcmp($row["USERNAME"],$_POST["user"]) == 0) {
-					$bool1 = true;
-				}
-				$cnt++;
-			}
+			$db->registerUser($_POST["fname"],$_POST["lname"],$_POST["user"],$_POST["pass"]);
+// 			foreach($db->query($sql) as $row) {
+// 				if(strcmp($row["USERNAME"],$_POST["user"]) == 0) {
+// 					$bool1 = true;
+// 				}
+// 				$cnt++;
+// 			}
 
-			if(!$bool1) {
-				$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $_POST["fname"]  . "\", \""  . $_POST["lname"]  . "\", \""  . $_POST["pass"]  . "\", \""  . $_POST["user"]  . "\")";
-				$db->exec($sql);
-			}
+// 			if(!$bool1) {
+// 				$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $_POST["fname"]  . "\", \""  . $_POST["lname"]  . "\", \""  . $_POST["pass"]  . "\", \""  . $_POST["user"]  . "\")";
+// 				$db->exec($sql);
+// 			}
 		} 
 		catch(PDOException $e) {
 			echo "Connection Failed: " . $e->getMessage();

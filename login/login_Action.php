@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+include __DIR__.'\..\Controllers\DBController.php';
 $fname = "empty";
 $lname = "empty";
 $userid = 0;

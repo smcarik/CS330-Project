@@ -6,7 +6,7 @@ if(!isset($_SESSION['Active'])){
 	$_SESSION['Error']=null;
 }
 ?>
-<<html>
+<html>
 <head>
 
  	<title>Login</title>

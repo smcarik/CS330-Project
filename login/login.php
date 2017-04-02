@@ -6,7 +6,7 @@ if(!isset($_SESSION['Active'])){
 	$_SESSION['Error']=null;
 }
 ?>
-<<html>
+<html>
 <head>
 
  	<title>Login</title>
@@ -35,7 +35,7 @@ if(!isset($_SESSION['Active'])){
 		</table>		
 		<input type="submit" value="Login">
 	</form>
-	<form action="http://www.users.csbsju.edu/~makounniyom/Dev2/register/register.html">
+	<form action="/CS330-Project/register/register.html">
 		<input type="submit" value="Register">
 	</form>
 	<p>

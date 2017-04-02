@@ -7,6 +7,7 @@
     <body>
     
     <?php
+   	 	include __DIR__.'\..\Controllers\DBController.php';
     	$projectNameUsed =false;
 	    try {
 	    	$db = new ContactDB;

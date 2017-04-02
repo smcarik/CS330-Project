@@ -1,7 +1,6 @@
 <?php
 	class ContactDB{
-		public $dbcon;
-		
+		static $dbcon;
 		function setUpDB(){
 			$dbcon = new PDO(
 					'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
@@ -33,6 +32,27 @@
 				return false;
 			}
 			return true;
+		}
+		
+		public function registerUser($fName, $lName, $uName, $pWord){
+			$sql = "SELECT * FROM UserInfo";
+			try{
+				foreach($dbcon->query($sql) as $row) {
+					if(strcmp($row["USERNAME"],$uName) == 0) {
+						$bool1 = true;
+					}
+					$cnt++;
+				}
+			
+				if(!$bool1) {
+					$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $fName  . "\", \""  . $lName  . "\", \""  . $pWord  . "\", \""  . $uName  . "\")";
+					$dbcon->exec($sql);
+				}
+			}
+			catch(PDOException $e) {
+			echo "Connection Failed: " . $e->getMessage();
+			}
+			
 		}
 	}
 ?>

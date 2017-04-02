@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+include __DIR__.'\..\Controllers\DBController.php';
 $fname = "empty";
 $lname = "empty";
 $userid = 0;
@@ -53,7 +54,8 @@ elseif($bool2) {
 	echo "<h1>Invalid password.</h1>";
 } 
 else {
-	echo "<h1> Hello, " . $fname . " " . $lname . ". Welcome Back! </h1>";
+	header('Location: /CS330-Project/UserHomePage/userHomePage.php');
+	/* echo "<h1> Hello, " . $fname . " " . $lname . ". Welcome Back! </h1>";
 	echo "<p>";
 	echo "<br> Your account information is as follows!";
 	echo "<br> UserID: " . $userid;
@@ -61,7 +63,7 @@ else {
 	echo "<br> Password: " . $_POST["pw"];
 	echo "<br> First Name: " . $fname;
 	echo "<br> Last Name: " . $lname;
-	echo "</p>";
+	echo "</p>"; */
 }
 
 ?>

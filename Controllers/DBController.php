@@ -1,14 +1,32 @@
 <?php
-	class ContactDB{
-		static $dbcon;
+	class ContactDB
+	{
+		protected $dbcon = null;
+		
 		function setUpDB(){
+			try {
+				$dbcon = new PDO(
+						'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
+						'BlazinPretzels',
+						'csci330'
+						);
+				$dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				return $dbcon;
+			}
+			catch(PDOException $e)
+			{
+				$_SESSION['Error'] = 'Failed to connect to Database';
+				header('Location: Login.php');
+				//echo "Connection Failed: " . $e->getMessage();
+			}
+			/*
 			$dbcon = new PDO(
 					'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
 					'BlazinPretzels',
 					'csci330'
 					);
 			$dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	
+			*/
 		}
 		
 		function addIfUnique($newProjectName, $newProjectDescription){
@@ -27,17 +45,26 @@
 			return false;
 		}
 		
-		public function registerUser($fName, $lName, $uName, $pWord){
+		public function registerUser($fName, $lName, $uName, $pWord)
+		{
+			$foo = new ContactDB();
+			$funcname = "setUpDB";
+			$dbcon = $foo->setUpDB();
+			
 			$sql = "SELECT * FROM UserInfo";
+			
 			try{
-				foreach($dbcon->query($sql) as $row) {
-					if(strcmp($row["USERNAME"],$uName) == 0) {
+				foreach($dbcon->query($sql) as $row) 
+				{
+					if(strcmp($row["USERNAME"],$uName) == 0) 
+					{
 						$bool1 = true;
 					}
 					$cnt++;
 				}
 			
-				if(!$bool1) {
+				if(!$bool1) 
+				{
 					$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $fName  . "\", \""  . $lName  . "\", \""  . $pWord  . "\", \""  . $uName  . "\")";
 					$dbcon->exec($sql);
 				}

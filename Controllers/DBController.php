@@ -50,9 +50,42 @@
 				}
 			}
 			catch(PDOException $e) {
-			echo "Connection Failed: " . $e->getMessage();
+				echo "Connection Failed: " . $e->getMessage();
 			}
 			
+		}
+		
+		public function isProjectMember($username, $project){
+			$sql = "SELECT * FROM UserProductName";
+			try{
+				foreach($dbcon->query($sql) as $row){
+					if(strcomp($row["USERNAME"], $username) == 0 && strcomp($row["PROJECT"], $project) == 0){
+						return true;
+					}
+						
+				}
+			}
+			catch(PDOException $e) {
+				echo "Connection Failed: " . $e->getMessage();
+			}
+			return false;
+		}
+		
+		public function isUsernameValid($username){
+			$sql = "SELECT * FROM UserInfo";
+			try{
+				foreach($dbcon->query($sql) as $row){
+					if(strcomp($row["USERNAME"], $username) == 0){
+						return false;
+					}
+			
+				}
+			}
+			catch(PDOException $e) {
+				echo "Connection Failed: " . $e->getMessage();
+				return false;
+			}
+			return true;
 		}
 	}
 ?>

@@ -55,7 +55,7 @@
 			
 		}
 		
-		public function isProjectMember($username, $project){
+		public function isProjectAMember($username, $project){
 			$sql = "SELECT * FROM UserProductName";
 			try{
 				foreach($dbcon->query($sql) as $row){

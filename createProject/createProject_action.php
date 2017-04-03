@@ -11,10 +11,16 @@
     	$projectNameUsed =false;
 	    try {
 	    	$db = new ContactDB;
-	    	$db->setUpDB();
 	    	$newProjectName = $_POST["projName"];
 	    	$newProjectDescription = $_POST["projDesc"];
-	    	$db->addIfUnique($newProjectName, $newProjectDescription);
+	    	$added = $db->addIfUnique($newProjectName, $newProjectDescription);
+	    	if($added){
+	    		echo "Project successfully created!";
+	    		?>
+	    		<form method="Post" action="CS330-Project/UserHomePage/userHomePage.php"></form>
+	    		<?php 
+	    		
+	    	}
 	    }
 	    catch(PDOException $e) {
 	    	echo "Connection Failed: " . $e->getMessage();

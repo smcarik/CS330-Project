@@ -6,7 +6,7 @@
 <body>
 	<?php
 		include __DIR__.'\..\Controllers\DBController.php';
-		$bool1 = false;
+		$registered = false;
 		$cnt = 0;
 		if((strcmp("",$_POST["user"]) == 0) or (strcmp("",$_POST["lname"]) == 0) or (strcmp("",$_POST["fname"]) == 0) or (strcmp("",$_POST["pass"]) == 0)) {
 			echo "<h1>Empty Field.</h1>";	
@@ -17,40 +17,36 @@
 		// Create connection
 		try { 
 			$db = new ContactDB;
-			$db->setUpDB();
-			/* $db = new PDO(
-					'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
-					'BlazinPretzels',
-					'csci330'
-			);
-			$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); */
 			$sql = "SELECT * FROM UserInfo";
-			$db->registerUser($_POST["fname"],$_POST["lname"],$_POST["user"],$_POST["pass"]);
-// 			foreach($db->query($sql) as $row) {
-// 				if(strcmp($row["USERNAME"],$_POST["user"]) == 0) {
-// 					$bool1 = true;
-// 				}
-// 				$cnt++;
-// 			}
-
-// 			if(!$bool1) {
-// 				$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $_POST["fname"]  . "\", \""  . $_POST["lname"]  . "\", \""  . $_POST["pass"]  . "\", \""  . $_POST["user"]  . "\")";
-// 				$db->exec($sql);
-// 			}
+			$registered = $db->registerUser($_POST["fname"],$_POST["lname"],$_POST["user"],$_POST["pass"]);
 		} 
 		catch(PDOException $e) {
 			echo "Connection Failed: " . $e->getMessage();
 		}
 	 
-		if($bool1) {
+		if(!$registered) {
 			echo "<h1>Invalid username.</h1>";	
 			echo "<br>";
 			echo "<button onclick=\"window.location='register.html'\">GO BACK</button>";
-		} else {
-			echo "<h1> REGISTRATION SUCCESSFUL!</h1>";	
+		} else if($registered){
+			echo "<h1> REGISTRATION SUCCESSFUL!</h1>";
+			echo "<br>"
+	?>
+			<form method="Post" action ="/../CS330-Project/login/login.php">
+				<input type="submit" value="Go to Login!">
+			</form>
+	<?php	
 			echo "<br>";
-			echo "<button onclick=\"window.location='../index.html'\">GO TO LOGIN!</button>";	
+			//echo "<button onclick=\"window.location='/CS330-Project/login/login.php'\">GO TO LOGIN!</button>";	
 		} 
+		else{
+			echo "An unknown error has occured please try again";
+	?>
+			<form method="Post" action ="/register.html">
+				<input type="submit" value="Go back to register">
+			</form>
+	<?php 
+		}
 	
 	?>
 	

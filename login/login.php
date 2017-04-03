@@ -1,10 +1,9 @@
 <!DOCTYPE HTML>
 <?php
-if(!isset($_SESSION['Active'])){
 	session_start();
-	$_SESSION['Active'] = 'Active';
-	$_SESSION['Error']=null;
-}
+	if(!isset($_SESSION['Error'])){
+		$_SESSION['Error']="none";
+	}
 ?>
 <html>
 <head>
@@ -25,7 +24,7 @@ if(!isset($_SESSION['Active'])){
 			<tbody>
 				<tr>
 					<td>UserName:</td>
-					<td><input type="text" name="uid"id="UserName"></td>
+					<td><input type="text" name="uid" id="UserName"></td>
 				</tr>
 				<tr>
 					<td>Password:</td>

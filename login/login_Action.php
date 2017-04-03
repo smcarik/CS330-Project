@@ -6,39 +6,20 @@
 </head>
 <body>
 <?php
+session_start();
+
+//include __DIR__.'\..\Users\UserInfo.php';
 include __DIR__.'\..\Controllers\DBController.php';
+
+
 $fname = "empty";
 $lname = "empty";
 $userid = 0;
-$bool1 = true;
-$bool2 = true;
+$loggedin = false;
 // Create connection
 try {
-	$db = new PDO(
-			'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
-			'BlazinPretzels',
-			'csci330'
-			);
-	$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-	$sql = "SELECT * FROM UserInfo WHERE USERNAME=\"" . $_POST["uid"] . "\"";
-	if(!$sql){
-		$_SESSION['Error']='Invalid Username entered';
-		header('Location: login.php');
-	}
-	else{
-		foreach($db->query($sql) as $row) {
-		$bool1 = false;
-			if(strcmp($row["PASSWORD"], $_POST["pw"]) == 0) {
-				$fname = $row["FNAME"];
-				$lname = $row["LNAME"];
-				$userid = $row["USERID"];
-				$bool2 = false;
-			}
-			else{
-				$_SESSION['Error']='Invalid Password entered';
-			}
-		}
-	}
+	$db = new ContactDB();
+	$loggedIn = $db->logIn($_POST['uid'],$_POST['pw']);
 }
 catch(PDOException $e){
 	$_SESSION['Error'] = 'Failed to connect to Database';
@@ -46,8 +27,14 @@ catch(PDOException $e){
 	//echo "Connection Failed: " . $e->getMessage();
 }
 
-
-if($bool1) {
+if($loggedIn){
+	echo $_SESSION['User']->getFName();
+	
+}
+else{
+	echo $_SESSION['Error'];
+}
+/* if($bool1) {
 	echo "<h1>Invalid username.</h1>";
 } 
 elseif($bool2) {
@@ -55,7 +42,7 @@ elseif($bool2) {
 } 
 else {
 	header('Location: /CS330-Project/UserHomePage/userHomePage.php');
-	/* echo "<h1> Hello, " . $fname . " " . $lname . ". Welcome Back! </h1>";
+	 echo "<h1> Hello, " . $fname . " " . $lname . ". Welcome Back! </h1>";
 	echo "<p>";
 	echo "<br> Your account information is as follows!";
 	echo "<br> UserID: " . $userid;
@@ -63,8 +50,8 @@ else {
 	echo "<br> Password: " . $_POST["pw"];
 	echo "<br> First Name: " . $fname;
 	echo "<br> Last Name: " . $lname;
-	echo "</p>"; */
-}
+	echo "</p>"; 
+} */
 
 ?>
 	<br>

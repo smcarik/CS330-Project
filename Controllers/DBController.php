@@ -1,6 +1,10 @@
 <?php
+	include __DIR__.'\..\Users\UserInfo.php';
 	class ContactDB
 	{
+		public function __construct(){
+			
+		}
 		protected $dbcon = null;
 		
 		function setUpDB(){
@@ -42,9 +46,13 @@
 				$db->exec($sql);
 				return true;
 			} */
+			if($newProjectName == null){
+				return false;
+			}
 			$sql = "INSERT INTO ProjectInfo (Name, ProjectDesc) VALUES (".$newProjectName.", ".$newProjectDescription.")";
 			try{
-				$db->exec($sql);
+				$dbcon = $this->setUpDB();
+				$dbcon->exec($sql);
 			}
 			catch(Exception $e){
 				return false;
@@ -54,9 +62,9 @@
 		
 		public function registerUser($fName, $lName, $uName, $pWord)
 		{
-			$foo = new ContactDB();
-			$funcname = "setUpDB";
-			$dbcon = $foo->setUpDB();
+			$dbcon = $this->setUpDB();
+			$taken = false;
+			$cnt = 0;
 			
 			$sql = "SELECT * FROM UserInfo";
 			
@@ -65,20 +73,23 @@
 				{
 					if(strcmp($row["USERNAME"],$uName) == 0) 
 					{
-						$bool1 = true;
+						$taken = true;
+						break;
 					}
 					$cnt++;
 				}
 			
-				if(!$bool1) 
+				if(!$taken) 
 				{
 					$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $fName  . "\", \""  . $lName  . "\", \""  . $pWord  . "\", \""  . $uName  . "\")";
 					$dbcon->exec($sql);
+					return true;
 				}
 			}
 			catch(PDOException $e) {
 				echo "Connection Failed: " . $e->getMessage();
 			}
+			return false;
 			
 		}
 		
@@ -98,12 +109,13 @@
 			return false;
 		}
 		
-		public function isUsernameValid($username){
+		public function doesUsernameExist($username){
+			$dbcon = $this->setUpDB();
 			$sql = "SELECT * FROM UserInfo";
 			try{
 				foreach($dbcon->query($sql) as $row){
-					if(strcomp($row["USERNAME"], $username) == 0){
-						return false;
+					if(strcmp($row["USERNAME"], $username) == 0){
+						return true;
 					}
 			
 				}
@@ -112,7 +124,35 @@
 				echo "Connection Failed: " . $e->getMessage();
 				return false;
 			}
-			return true;
+			return false;
+		}
+		
+		
+		public function logIn($username, $password){
+			$dbcon = $this->setUpDB();
+			
+			$sql = "SELECT * FROM UserInfo";
+			$unamegood = $this->doesUsernameExist($username);
+			if(!$unamegood){
+				$_SESSION['Error']='Invalid Username entered';
+				return false;
+				//header('Location: CS330/login/login.php');
+			}
+			else{
+				foreach($dbcon->query($sql) as $row){
+					if(strcmp($row["PASSWORD"], $password) == 0 && strcmp($row['USERNAME'],$username)==0) {
+						$useri = new User($row['FNAME'],$row['LNAME'],$row['USERNAME']);
+						$_SESSION['User'] = $useri;
+						$_SESSION['Error'] = "none";
+						return true;
+					}
+					else{
+						$_SESSION['Error']='Invalid Password entered for '.$username;
+						//header('Location: CS330/login/login.php');
+					}
+				}
+				return false;
+			}
 		}
 	}
 ?>

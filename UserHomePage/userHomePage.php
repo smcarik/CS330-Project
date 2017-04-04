@@ -9,11 +9,11 @@
     <body>
     <?php   
     include __DIR__.'\..\Controllers\DBController.php';
-    session_start();
+    //session_start();
     $user = $_SESSION['User']->getUName();
     $db = new ContactDB;
     $projectNames = $db->getAllProjectsForUser($user);
-    echo "Welcome, '.$user.', to the user home page. Here are the projects that you are a member of:"
+    echo "Welcome, $user, to the user home page. Here are the projects that you are a member of:"
     ?>
     <table>
 	    <?php

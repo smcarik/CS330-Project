@@ -21,16 +21,7 @@
 			{
 				$_SESSION['Error'] = 'Failed to connect to Database';
 				header('Location: Login.php');
-				//echo "Connection Failed: " . $e->getMessage();
 			}
-			/*
-			$dbcon = new PDO(
-					'mysql:host=devsrv.cs.csbsju.edu;dbname=BlazinPretzels',
-					'BlazinPretzels',
-					'csci330'
-					);
-			$dbcon->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			*/
 		}
 		
 		function addIfUnique($newProjectName, $newProjectDescription){ //adds a new project to the project table if the name is unique

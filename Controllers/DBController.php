@@ -34,18 +34,6 @@
 		}
 		
 		function addIfUnique($newProjectName, $newProjectDescription){ //adds a new project to the project table if the name is unique
-			/* $sql = "SELECT * FROM ProjectInfo";
-			 
-			foreach($db->query($sql) as $row) {
-				if(strcmp($row["Name"],$newProjectName) == 0) { //checks each project name in table to see if it matches input
-					$projectNameUsed = true;
-				}
-			}
-			if(!$projectNameUsed){
-				$sql = "INSERT INTO ProjectInfo (Name, ProjectDesc) VALUES (".$newProjectName.", ".$newProjectDescription.")";
-				$db->exec($sql);
-				return true;
-			} */
 			if($newProjectName == null){
 				return false;
 			}
@@ -53,11 +41,29 @@
 			try{
 				$dbcon = $this->setUpDB();
 				$dbcon->exec($sql);
+				if($this->getProject($newProjectName)){
+					return true;
+				}
 			}
 			catch(Exception $e){
 				return false;
 			}
-			return true;
+		}
+		
+		public function getProject($projname){
+			$dbcon = $this->setUpDB();
+			$sql = "SELECT * from ProjectInfo where Name = '".$projname."'";
+			try{
+				foreach($dbcon->query($sql) as $row){
+					if(strcmp($row['Name'],$projname) == 0){
+						return true;
+					}
+				}
+				return false;
+			}
+			catch(PDOException $e) {
+				echo "Connection Failed: " . $e->getMessage();
+			}
 		}
 		
 		public function registerUser($fName, $lName, $uName, $pWord)
@@ -96,6 +102,7 @@
 		public function isProjectAMember($username, $project){
 			$sql = "SELECT * FROM UserProductName";
 			try{
+				$dbcon = $this->setUpDB();
 				foreach($dbcon->query($sql) as $row){
 					if(strcomp($row["USERNAME"], $username) == 0 && strcomp($row["PROJECT"], $project) == 0){
 						return true;

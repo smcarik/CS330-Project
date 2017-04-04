@@ -8,12 +8,18 @@
 </head>
 <body>
 	<h1>Please enter a valid username to invite other members.</h1>
+	<?php 
+		if($_SESSION['Error'] != "none"){
+			echo "Error: ".$_SESSION['Error'];
+			$_SESSION['Error'] = "none";
+		}
+	?>
 	<form action="invite_action.php" method="POST">
 		<table>
 			<tbody>
 				<tr>
 					<td>UserName:</td>
-					<td><input type="text" name="uid" id="UserName"></td>
+					<td><input type="text" name="uname" id="UserName"></td>
 				</tr>
 				<tr>
 										<td>Project Name:</td>

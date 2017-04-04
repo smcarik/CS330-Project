@@ -11,7 +11,7 @@
 
 	?>
 	
-	<form method="POST" action="\..\createProject\createProject.php">
+	<form method="POST" action="\CS330-Project\createProject\createProject.php">
 		<input name="Create new Project" value = "Create new Project" type="Submit">
 	</form>
     </body>

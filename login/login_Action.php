@@ -28,11 +28,12 @@ catch(PDOException $e){
 }
 
 if($loggedIn){
-	echo $_SESSION['User']->getFName();
+	$_SESSION['LoggedIn'] = true;
+	header('Location: /CS330-Project/UserHomePage/userHomePage.php');
 	
 }
 else{
-	echo $_SESSION['Error'];
+	header('Location: Login.php');
 }
 /* if($bool1) {
 	echo "<h1>Invalid username.</h1>";

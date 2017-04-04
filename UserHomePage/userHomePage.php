@@ -8,6 +8,9 @@
 
     <body>
     <?php   
+    include __DIR__.'\..\Controllers\DBController.php';
+    session_id('123456789');
+    session_start();
     $user = $_SESSION['User']->getUName();
     $db = new ContactDB;
     $projectNames = $db->getAllProjectsForUser($user);

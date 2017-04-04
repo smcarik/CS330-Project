@@ -6,6 +6,7 @@
 </head>
 <body>
 <?php
+session_id('123456789');
 session_start();
 
 //include __DIR__.'\..\Users\UserInfo.php';
@@ -28,6 +29,7 @@ catch(PDOException $e){
 }
 
 if($loggedIn){
+	//echo $_SESSION['User']->getUName();
 	$_SESSION['LoggedIn'] = true;
 	header('Location: /CS330-Project/UserHomePage/userHomePage.php');
 	

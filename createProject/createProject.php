@@ -10,6 +10,7 @@
  			<fieldset style = "width: 30%">
  				<h1><legend>Create a New Project!</legend></h1>
  				   <?php 
+ 				   session_id('123456789');
  				   session_start();
 						if($_SESSION['Error']!="none"){
 							echo "Error:".$_SESSION['Error']; 

@@ -57,7 +57,8 @@
 			}
 			try{
 				$dbcon->exec($sql);
-				if(isProjectMember($username,$proj)){
+				
+				if($this->isProjectMember($username,$proj)){
 					return true;
 				}
 			}

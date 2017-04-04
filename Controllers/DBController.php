@@ -41,6 +41,29 @@
 			}
 		}
 		
+		public function addUserToProject($username, $proj){
+			$dbcon = $this->setUpDB();
+			$sql = "INSERT INTO UserProjectInfo (username, projectName) VALUES ('".$username."', '".$proj."')";
+			
+			if(!isProjectMember($_SESSION['User']->getUName(), $proj)){
+				$_SESSION['Error'] = "Inviter is not part of project";
+				return false;
+			}
+			if(isProjectMember($username,$proj)){
+				$_SESSION['Error'] = "user: ".$username." Is already part of project";
+				return false;
+			}
+			try{
+				$dbcon->exec($sql);
+				if(isProjectMember($username,$proj)){
+					return true;
+				}
+			}
+			catch(Exception $e){
+				return false;
+			}
+		}
+		
 		public function getProject($projname){
 			$dbcon = $this->setUpDB();
 			$sql = "SELECT * from ProjectInfo where Name = '".$projname."'";
@@ -92,10 +115,14 @@
 		
 		public function isProjectMember($username, $project){
 			$sql = "SELECT * FROM UserProjectInfo";
+			if(!$this->doesUsernameExist($username)){
+				$_SESSION['Error'] = "Username: ".$username." does not exist";
+				return false;
+			}
 			try{
 				$dbcon = $this->setUpDB();
 				foreach($dbcon->query($sql) as $row){
-					if(strcomp($row["username"], $username) == 0 && strcomp($row["projectName"], $project) == 0){
+					if(strcmp($row["username"], $username) == 0 && strcmp($row["projectName"], $project) == 0){
 						return true;
 					}
 						

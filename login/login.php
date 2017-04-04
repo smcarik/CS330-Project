@@ -1,6 +1,5 @@
 <!DOCTYPE HTML>
 <?php
-	session_id('123456789');
 	session_start();
 	if(!isset($_SESSION['Error'])){
 		$_SESSION['Error']="none";

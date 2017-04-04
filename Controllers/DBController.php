@@ -1,6 +1,5 @@
 <?php
 	include __DIR__.'\..\Users\UserInfo.php';
-	session_id('123456789');
 	session_start();
 	class ContactDB
 	{

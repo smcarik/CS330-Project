@@ -104,7 +104,7 @@
 			try{
 				$dbcon = $this->setUpDB();
 				foreach($dbcon->query($sql) as $row){
-					if(strcomp($row["username"], $username) == 0 && strcomp($row["projectName"], $project) == 0){
+					if(strcmp($row["username"], $username) == 0 && strcmp($row["projectName"], $project) == 0){
 						return true;
 					}
 						

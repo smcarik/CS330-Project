@@ -15,10 +15,7 @@
 	    	$newProjectDescription = $_POST["projDesc"];
 	    	$added = $db->addIfUnique($newProjectName, $newProjectDescription);
 	    	if($added){
-	    		echo "Project successfully created!";
-	    		echo "Redirecting please wait";
-	    		sleep(3);
-	    		header('Location: /CS330-Project/UserHomePage/userHomePage.php');	
+	    		header('Location: /CS330-Project/UserHomePage/userHomePage.php');
 	    	}
 	    	else{
 	    		$_SESSION['Error'] = "Failed to add project to DB";

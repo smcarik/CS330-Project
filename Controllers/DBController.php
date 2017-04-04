@@ -32,6 +32,7 @@
 			try{
 				$dbcon = $this->setUpDB();
 				$dbcon->exec($sql);
+				$this->addUserToProject($_SESSION['User']->getUName(),$newProjectName);
 				if($this->getProject($newProjectName)){
 					return true;
 				}

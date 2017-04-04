@@ -7,7 +7,7 @@
 </head>
 
     <body>
-    <p>Welcome to your user home page.  This is a default screen and will be updated earlier. ENJOY!</p>
+    <p>Welcome to your user home page.  This is a default screen and will be updated later. ENJOY!</p>
     <?php
 
 	?>

@@ -17,6 +17,7 @@
 	<?php 
 	if($_SESSION['Error']!= "none"){
 		echo "Error: " . $_SESSION['Error'];
+		$_SESSION['Error'] = "none";
 	}
 	?>
 	<form action="login_Action.php" method="POST">

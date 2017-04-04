@@ -15,6 +15,10 @@
 					<td>UserName:</td>
 					<td><input type="text" name="uid" id="UserName"></td>
 				</tr>
+				<tr>
+										<td>Project Name:</td>
+					<td><input type="password" name="pw"></td>
+				</tr>
 			</tbody>		
 		</table>		
 		<input type="submit" value="Invite">

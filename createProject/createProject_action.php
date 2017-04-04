@@ -16,10 +16,13 @@
 	    	$added = $db->addIfUnique($newProjectName, $newProjectDescription);
 	    	if($added){
 	    		echo "Project successfully created!";
-	    		?>
-	    		<form method="Post" action="CS330-Project/UserHomePage/userHomePage.php"></form>
-	    		<?php 
-	    		
+	    		echo "Redirecting please wait";
+	    		sleep(3);
+	    		header('Location: /CS330-Project/UserHomePage/userHomePage.php');	
+	    	}
+	    	else{
+	    		$_SESSION['Error'] = "Failed to add project to DB";
+	    		header('Location: createProject.php');
 	    	}
 	    }
 	    catch(PDOException $e) {

@@ -9,6 +9,12 @@
     	<div id="Create-Project">
  			<fieldset style = "width: 30%">
  				<h1><legend>Create a New Project!</legend></h1>
+ 				   <?php 
+						if($_SESSION['Error']!="none"){
+							echo "Error:".$_SESSION['Error']; 
+							$_SESSION['Error']= "none";
+						}
+					?>		
  				<form method ="POST" action="createProject_action.php">
  					<table class = "dataentrytable" border="1">
  						<tbody>
@@ -37,8 +43,6 @@
  				</form>
  			</fieldset>
     	</div>
-   <?php 
 
-	?>
     </body>
 </html>

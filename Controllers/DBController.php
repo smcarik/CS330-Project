@@ -1,4 +1,5 @@
 <?php
+	session_start();
 	include __DIR__.'\..\Users\UserInfo.php';
 	class ContactDB
 	{

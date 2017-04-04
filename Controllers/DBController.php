@@ -57,6 +57,18 @@
 			}
 		}
 		
+		public function getAllProjectsForUser($user){
+			$dbcon = $this->setUpDB();
+			$sql = "SELECT * from UserProjectInfo WHERE Name = '".$user."'";
+			try{
+				return $dbcon->query($sql);
+			}
+			catch(PDOException $e) {
+				echo "Connection Failed: " . $e->getMessage();
+			}
+			return "NONE";
+		}
+				
 		public function registerUser($fName, $lName, $uName, $pWord)
 		{
 			$dbcon = $this->setUpDB();

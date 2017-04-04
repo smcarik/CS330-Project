@@ -7,13 +7,24 @@
 </head>
 
     <body>
-    <p>Welcome to your user home page.  This is a default screen and will be updated later. ENJOY!</p>
-    <?php
-
-	?>
-	
+    <?php   
+    $user = $_SESSION['User']->getUName();
+    $db = new ContactDB;
+    $projectNames = $db->getAllProjectsForUser($user);
+    echo "Welcome, '.$user.', to the user home page. Here are the projects that you are a member of:"
+    ?>
+    <table>
+	    <?php
+	    foreach($projectNames as $proj){?>
+    		<tr>$proj</tr>
+    	<?php
+    	}?>
+    </table>
 	<form method="POST" action="\CS330-Project\createProject\createProject.php">
 		<input name="Create new Project" value = "Create new Project" type="Submit">
 	</form>
     </body>
 </html>
+
+	
+	

@@ -99,12 +99,12 @@
 			
 		}
 		
-		public function isProjectAMember($username, $project){
-			$sql = "SELECT * FROM UserProductName";
+		public function isProjectMember($username, $project){
+			$sql = "SELECT * FROM UserProjectInfo";
 			try{
 				$dbcon = $this->setUpDB();
 				foreach($dbcon->query($sql) as $row){
-					if(strcomp($row["USERNAME"], $username) == 0 && strcomp($row["PROJECT"], $project) == 0){
+					if(strcomp($row["username"], $username) == 0 && strcomp($row["projectName"], $project) == 0){
 						return true;
 					}
 						

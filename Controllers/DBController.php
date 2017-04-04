@@ -84,7 +84,7 @@
 		
 		public function getAllProjectsForUser($user){
 			$dbcon = $this->setUpDB();
-			$sql = "SELECT * from UserProjectInfo WHERE Name = '".$user."'";
+			$sql = "SELECT * from UserProjectInfo WHERE username = '".$user."'";
 			try{
 				return $dbcon->query($sql);
 			}

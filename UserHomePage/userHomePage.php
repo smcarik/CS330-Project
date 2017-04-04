@@ -18,7 +18,11 @@
     <table>
 	    <?php
 	    foreach($projectNames as $proj){?>
-    		<tr>$proj</tr>
+    		<tr>
+    			<td>
+    			<?php echo $proj["projectName"]?>
+    			</td>
+    		</tr>
     	<?php
     	}?>
     </table>

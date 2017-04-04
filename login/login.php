@@ -15,7 +15,7 @@
 <body>
 	<h1>Welcome to BlazinPretzel's Scrum Board</h1>
 	<?php 
-	if($_SESSION['Error']!= null){
+	if($_SESSION['Error']!= "none"){
 		echo "Error: " . $_SESSION['Error'];
 	}
 	?>

@@ -9,6 +9,7 @@
 <body>
 	<h1>Please enter a valid username to invite other members.</h1>
 	<?php 
+		session_start();
 		if($_SESSION['Error'] != "none"){
 			echo "Error: ".$_SESSION['Error'];
 			$_SESSION['Error'] = "none";
@@ -23,11 +24,14 @@
 				</tr>
 				<tr>
 										<td>Project Name:</td>
-					<td><input type="text" name="projectName" id="Project Name"></td>
+					<td><input type="text" name="projname" id="Project Name"></td>
 				</tr>
 			</tbody>		
 		</table>		
 		<input type="submit" value="Invite">
+	</form>
+	<form action ="/CS330-Project/UserHomePage/userHomePage.php">
+			<input type = "submit" value = "Back">
 	</form>
 	<p>
 	</p>

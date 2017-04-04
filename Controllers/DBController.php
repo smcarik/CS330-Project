@@ -37,7 +37,7 @@
 			if($newProjectName == null){
 				return false;
 			}
-			$sql = "INSERT INTO ProjectInfo (Name, ProjectDesc) VALUES (".$newProjectName.", ".$newProjectDescription.")";
+			$sql = "INSERT INTO ProjectInfo (Name, ProjectDesc) VALUES ('".$newProjectName."', '".$newProjectDescription."')";
 			try{
 				$dbcon = $this->setUpDB();
 				$dbcon->exec($sql);
@@ -87,7 +87,7 @@
 			
 				if(!$taken) 
 				{
-					$sql = "INSERT INTO UserInfo (USERID, FNAME, LNAME, PASSWORD, USERNAME) VALUES (" . $cnt . ", \"" . $fName  . "\", \""  . $lName  . "\", \""  . $pWord  . "\", \""  . $uName  . "\")";
+					$sql = "INSERT INTO UserInfo (FNAME, LNAME, PASSWORD, USERNAME) VALUES ('" . $fName . "', '"  . $lName  . "', '"  . $pWord  . "', '"  . $uName  . "')";
 					$dbcon->exec($sql);
 					return true;
 				}

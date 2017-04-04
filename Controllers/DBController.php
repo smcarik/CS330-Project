@@ -34,7 +34,7 @@
 			try{
 				$dbcon = $this->setUpDB();
 				$dbcon->exec($sql);
-				$this->addUserToProject($_SESSION['User']->getUName(),$newProjectName);
+				$this->addUserToProject($_SESSION['User']->getUName(),$newProjectName, true);
 				if($this->getProject($newProjectName)){
 					return true;
 				}
@@ -44,15 +44,15 @@
 			}
 		}
 		
-		public function addUserToProject($username, $proj){
+		public function addUserToProject($username, $proj, $creating){
 			$dbcon = $this->setUpDB();
 			$sql = "INSERT INTO UserProjectInfo (username, projectName) VALUES ('".$username."', '".$proj."')";
 			
-			if(!isProjectMember($_SESSION['User']->getUName(), $proj)){
+			if(!$this->isProjectMember($_SESSION['User']->getUName(), $proj) && !$creating){
 				$_SESSION['Error'] = "Inviter is not part of project";
 				return false;
 			}
-			if(isProjectMember($username,$proj)){
+			if($this->isProjectMember($username,$proj)){
 				$_SESSION['Error'] = "user: ".$username." Is already part of project";
 				return false;
 			}

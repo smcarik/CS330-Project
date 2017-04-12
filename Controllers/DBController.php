@@ -167,7 +167,7 @@
 		}
 		
 		
-		public function logIn($username, $password){
+		public function login($username, $password){
 			$dbcon = $this->setUpDB();
 			
 			$sql = "SELECT * FROM UserInfo";

@@ -19,7 +19,7 @@ $loggedin = false;
 // Create connection
 try {
 	$db = new ContactDB();
-	$loggedIn = $db->logIn($_POST['uid'],$_POST['pw']);
+	$loggedIn = $db->login($_POST['uid'],$_POST['pw']);
 }
 catch(PDOException $e){
 	$_SESSION['Error'] = 'Failed to connect to Database';

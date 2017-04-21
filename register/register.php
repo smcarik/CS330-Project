@@ -8,7 +8,7 @@
 		include __DIR__.'\..\Controllers\DBController.php';
 		$registered = false;
 		$cnt = 0;
-		if((strcmp("",$_POST["user"]) == 0) or (strcmp("",$_POST["lname"]) == 0) or (strcmp("",$_POST["fname"]) == 0) or (strcmp("",$_POST["pass"]) == 0)) {
+		if((strcmp("",$_POST["user"]) == 0) or (strcmp("",$_POST["pass"]) == 0)) {
 			echo "<h1>Empty Field.</h1>";	
 			echo "<br>";
 			echo "<button onclick=\"window.location='register.html'\">GO BACK</button>";

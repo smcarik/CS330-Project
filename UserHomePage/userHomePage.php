@@ -20,6 +20,12 @@
 	    foreach($projectNames as $proj){?>
     		<tr>
     			<td>
+    			
+    			
+    			<!-- Make projects clickable, possibly using href or even create a button to send
+    			to project home page, either one works.  next create a hidden field that passes the project name 
+    			as a variable.  and upon clicking the project redirect them to projectHomePage.php-->
+    			
     			<?php echo $proj["projectName"]?>
     			</td>
     		</tr>

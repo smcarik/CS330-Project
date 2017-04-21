@@ -26,7 +26,7 @@
     			to project home page, either one works.  next create a hidden field that passes the project name 
     			as a variable.  and upon clicking the project redirect them to projectHomePage.php-->
     			
-    			<?php echo $proj["projectName"]?>
+    			 <a href="/CS330-Project/ProjectHomePage/projectHomePage.php"> <?php echo $proj["projectName"]?></a>
     			</td>
     		</tr>
     	<?php

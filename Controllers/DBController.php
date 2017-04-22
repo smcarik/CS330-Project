@@ -35,6 +35,17 @@
 				$dbcon->exec($sql);
 				$success = $this->addUserToProject($_SESSION['User']->getUName(),$newProjectName);
 				if($this->getProject($newProjectName) && $success){
+					$sql1 = "CREATE TABLE ".$newProjectName."PBL 
+							(ID INT NOT NULL DEFAULT 0, 
+							ASA LONGTEXT NOT NULL, 
+							IWANT LONGTEXT NOT NULL, 
+							INORDERTO LONGTEXT NOT NULL, 
+							ACCEPT LONGTEXT NOT NULL, 
+							SIZE CHAR (1) NOT NULL, 
+							SPRINT INT NOT NULL DEFAULT 0,
+							PRIMARY KEY (ID))";
+					$dbcon->exec($sql1);
+					$_SESSION['project'] = $newProjectName;
 					return true;
 				}
 			}

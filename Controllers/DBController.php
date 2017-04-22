@@ -235,5 +235,27 @@
 			 }
 			 
 		}
+		
+		public function addItemToBacklog($projName, $item){
+			 //$item = array("asa", "iwant", "inorderto", "accept", "size", "sprint");
+			 $dbcon = $this->setUpDB();
+			 $backlog = $projName . "PBL";
+			 
+			 $sql = "SELECT * FROM ". $backlog;
+			 $idCount = 0;
+			 foreach($dbcon->query($sql) as $row){
+			 	$idCount = $idCount + 1;
+			 }
+			 
+			 $backLogContains = $this->doesBacklogContain($backlog, $item);
+			 if($backLogContains) {
+			 	$sql = "INSERT INTO ". $backlog ." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT) VALUES (". $idCount . ", '" . $item[0] ."', '"  . $item[1] ."', '"  . $item[2] ."', '"  . $item[3] ."', "  . $item[4] .", "  . $item[5] .")";
+				$dbcon->exec($sql);
+				return true;
+			 } else {
+			 	$_SESSION['Error'] = "Item already in Backlog.";
+			 	return false;
+			 }
+		}
 	}
 ?>

@@ -53,23 +53,33 @@
 			}
 		}
 		
-		public function updateOrder($userstory, $position){
+		public function updateOrder($position){
 			$dbcon = $this->setUpDB();
-			$sql = "Select * from ".$_SESSION['project']."PBL WHERE ID = 0";
-			$proj;
-			foreach($dbcon->query($sql) as $row){
-				$proj = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
+			if($position == 0){
+				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL";
+				foreach($dbcon->query($sql0)as $row){
+					$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
+					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($us->getid()+1)." WHERE ID = ".$us->getid();
+					$dbcon->exec($sqlu);
+				}
 			}
-			$proj->setid(9999999999);
-			$sql1 = "Select * from ".$_SESSION['project']."PBL where ID<=".$position." && ID>0";
-			foreach($dbcon->query($sql1) as $row){
-				$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
-				$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($pro->getid()-1)." WHERE ID = ".$pro->getid();
-				$dbcon->exec($sqlu);
+			else{
+				$sql = "Select * from ".$_SESSION['project']."PBL WHERE ID = 0";
+				$proj;
+				foreach($dbcon->query($sql) as $row){
+					$proj = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
+				}
+				$proj->setid(9999999999);
+				$sql1 = "Select * from ".$_SESSION['project']."PBL where ID<=".$position." && ID>0";
+				foreach($dbcon->query($sql1) as $row){
+					$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
+					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($pro->getid()-1)." WHERE ID = ".$pro->getid();
+					$dbcon->exec($sqlu);
+				}
+				$proj->setid($position);
+				$sqlup = "UPDATE ".$_SESSION['project']."PBL SET ID = ".$proj->getid()." WHERE ID = 9999999999";
+				$dbcon->exec($sqlup);
 			}
-			$proj->setid($position);
-			$sqlup = "UPDATE ".$_SESSION['project']."PBL SET ID = ".$proj->getid()." WHERE ID = 9999999999";
-			$dbcon->exec($sqlup);
 		}
 		
 		public function addUserToProject($username, $proj){

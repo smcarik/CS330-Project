@@ -253,7 +253,7 @@
 			 //$item = array("asa", "iwant", "inorderto", "accept", "size", "sprint");
 			 $dbcon = $this->setUpDB();
 			 $backlog = $_SESSION['project'] . "PBL";
-			 this->updateOrder(0);
+			 $this -> updateOrder(0);
 			 $us->setid(0);
 			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT) VALUES (".$us.getid().", '".$us.getasa()."', '".$us.getiwant()."', '".$us.getinorderto()."', '".$us.getaccept()."', ".$us.getsize().", ".$us.getsprint().")";
 			 $dbcon->exec($sql);

@@ -15,23 +15,20 @@
     $projectNames = $db->getAllProjectsForUser($user);
     echo "Welcome, $user, to the user home page. Here are the projects that you are a member of:"
     ?>
-    <table>
-	    <?php
-	    foreach($projectNames as $proj){?>
-    		<tr>
-    			<td>
-    			
-    			
-    			<!-- Make projects clickable, possibly using href or even create a button to send
-    			to project home page, either one works.  next create a hidden field that passes the project name 
-    			as a variable.  and upon clicking the project redirect them to projectHomePage.php-->
-    			
-    			 <a href="/CS330-Project/ProjectHomePage/projectHomePage.php"> <?php echo $proj["projectName"]?></a>
-    			</td>
-    		</tr>
-    	<?php
-    	}?>
-    </table>
+    <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php">
+    	<input>
+	    <table>
+		    <?php
+		    foreach($projectNames as $proj){?>
+	    		<tr>
+	    			<td><?php echo $proj["projectName"]?></td> //print out each project name
+	    			<td><input type="hidden" name="prjName" value=<?php echo $proj["projectName"]?>></td> //create a hidden field value for each respective project name
+	    			<td><input name="view" value = "view" type="Submit"></td> //create a view button for each project
+	    		</tr>
+	    	<?php
+	    	}?>
+	    </table>
+    </form>
 	<form method="POST" action="\CS330-Project\createProject\createProject.php">
 		<input name="Create new Project" value = "Create new Project" type="Submit">
 	</form>

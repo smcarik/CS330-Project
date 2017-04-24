@@ -43,6 +43,9 @@
 							ACCEPT LONGTEXT NOT NULL, 
 							SIZE CHAR (1) NOT NULL, 
 							SPRINT INT NOT NULL DEFAULT 0,
+							DONEPERCENT INT NOT NULL DEFAULT 0,
+							APPROVED BOOLEAN DEFAULT NULL,
+							REASON LONGTEXT DEFAULT NULL,
 							PRIMARY KEY (ID))";
 					$dbcon->exec($sql1);
 					return true;

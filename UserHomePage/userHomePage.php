@@ -21,9 +21,9 @@
 		    <?php
 		    foreach($projectNames as $proj){?>
 	    		<tr>
-	    			<td><?php echo $proj["projectName"]?></td> //print out each project name
-	    			<td><input type="hidden" name="prjName" value=<?php echo $proj["projectName"]?>></td> //create a hidden field value for each respective project name
-	    			<td><input name="view" value = "view" type="Submit"></td> //create a view button for each project
+	    			<td><?php echo $proj["projectName"]?></td> 
+	    			<td><input type="hidden" name="prjName" value=<?php echo $proj["projectName"]?>></td> 
+	    			<td><input name="view" value = "view" type="Submit"></td> 
 	    		</tr>
 	    	<?php
 	    	}?>

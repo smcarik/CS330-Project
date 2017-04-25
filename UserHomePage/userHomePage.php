@@ -16,7 +16,6 @@
     echo "Welcome, $user, to the user home page. Here are the projects that you are a member of:"
     ?>
     <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php">
-    	<input>
 	    <table>
 		    <?php
 		    foreach($projectNames as $proj){?>

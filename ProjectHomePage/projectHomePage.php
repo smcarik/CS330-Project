@@ -8,8 +8,8 @@
     <body>
     <h1>This is a temporary project page, update later to include all functionality</h1>
     <?php
-    $_SESSION['currentProjectName']=$_POST['prjName']; //create a session variable for the current project
-    echo $_SESSION['currentProjectName'];
+    $_SESSION['project']=$_POST['prjName']; //create a session variable for the current project
+    echo $_SESSION['project'];
 	?>
     </body>
 </html>

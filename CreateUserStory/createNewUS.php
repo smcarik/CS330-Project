@@ -36,7 +36,8 @@
 		<input type="submit" value="Create">
 	</form>
     <?php
-
+    	session_start();
+		echo $_SESSION['project'];
 	?>
     </body>
 </frameset>

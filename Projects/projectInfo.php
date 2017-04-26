@@ -53,7 +53,7 @@ class UserStoryInfo{
 	}
 	
 	public function getaccept(){
-		return $this->$accept;
+		return $this->accept;
 	}
 	
 	public function setsize($s){

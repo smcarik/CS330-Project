@@ -8,11 +8,11 @@
 
 </head>
 <body>
-	<h1>This is a temporary project page, update later to include all
-		functionality</h1>
+	<h1>Project Home Page</h1>
     <?php
-				$_SESSION ['project'] = $_POST ['prjName']; // create a session variable for the current project
-				echo "Project:". $_SESSION ['project'];
+    		session_start();
+				$_SESSION['project'] = "".$_POST['prjName'].""; // create a session variable for the current project
+				echo "Project:". $_SESSION['project'];
 				
 				?>
 	
@@ -26,7 +26,11 @@
 				<td>Tasks Completed</td>
 			</tr>
 			<tr>
-				<td><button onclick="window.location.href='/../CS330-Project/CreateUserStory/CreateNewUS.php'">Create User Stories</button></td>
+			<td>
+				<form method="POST" action="/CS330-Project/CreateUserStory/CreateNewUS.php">
+					<input type ="Submit" value="create new userstory" name ="create new userstory">
+				</form>
+			</td>
 				<td> </td>
 				<td><button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php'">Create a Task</button></td>
 				<td> </td>

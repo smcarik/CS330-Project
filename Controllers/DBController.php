@@ -43,10 +43,10 @@
 							ACCEPT LONGTEXT NOT NULL, 
 							SIZE CHAR (1) NOT NULL, 
 							SPRINT INT NOT NULL DEFAULT 0,
-							DONEPERCENT INT NOT NULL DEFAULT 0,
-							APPROVED BOOLEAN DEFAULT NULL,
-							REASON LONGTEXT DEFAULT NULL,
 							PRIMARY KEY (ID))";
+					//DONEPERCENT INT NOT NULL DEFAULT 0,
+					//APPROVED BOOLEAN DEFAULT NULL,
+					//REASON LONGTEXT DEFAULT NULL,
 					$dbcon->exec($sql1);
 					return true;
 				}
@@ -59,6 +59,7 @@
 		public function updateOrder($position){
 			$dbcon = $this->setUpDB();
 			if($position == 0){
+				echo $_SESSION['project'];
 				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL";
 				foreach($dbcon->query($sql0)as $row){
 					$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
@@ -252,10 +253,10 @@
 		public function addItemToBacklog($us){
 			 //$item = array("asa", "iwant", "inorderto", "accept", "size", "sprint");
 			 $dbcon = $this->setUpDB();
-			 $backlog = $_SESSION['project'] . "PBL";
+			 $backlog = $_SESSION['project']."PBL";
 			 $this -> updateOrder(0);
 			 $us->setid(0);
-			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT) VALUES (".$us.getid().", '".$us.getasa()."', '".$us.getiwant()."', '".$us.getinorderto()."', '".$us.getaccept()."', '".$us.getsize()."', ".$us.getsprint().")";
+			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().")";
 			 $dbcon->exec($sql);
 		}
 	}

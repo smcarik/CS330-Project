@@ -43,10 +43,10 @@
 							ACCEPT LONGTEXT NOT NULL, 
 							SIZE CHAR (1) NOT NULL, 
 							SPRINT INT NOT NULL DEFAULT 0,
+							DONEPERCENT INT NOT NULL DEFAULT 0,
+							APPROVED BOOLEAN DEFAULT FALSE,
+							REASON LONGTEXT DEFAULT NULL,
 							PRIMARY KEY (ID))";
-					//DONEPERCENT INT NOT NULL DEFAULT 0,
-					//APPROVED BOOLEAN DEFAULT NULL,
-					//REASON LONGTEXT DEFAULT NULL,
 					$dbcon->exec($sql1);
 					return true;
 				}
@@ -62,7 +62,7 @@
 				echo $_SESSION['project'];
 				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL";
 				foreach($dbcon->query($sql0)as $row){
-					$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
+					$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
 					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($us->getid()+1)." WHERE ID = ".$us->getid();
 					$dbcon->exec($sqlu);
 				}
@@ -71,12 +71,12 @@
 				$sql = "Select * from ".$_SESSION['project']."PBL WHERE ID = 0";
 				$proj;
 				foreach($dbcon->query($sql) as $row){
-					$proj = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
+					$proj = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
 				}
 				$proj->setid(9999999999);
 				$sql1 = "Select * from ".$_SESSION['project']."PBL where ID<=".$position." && ID>0";
 				foreach($dbcon->query($sql1) as $row){
-					$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT']);
+					$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
 					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($pro->getid()-1)." WHERE ID = ".$pro->getid();
 					$dbcon->exec($sqlu);
 				}
@@ -256,7 +256,7 @@
 			 $backlog = $_SESSION['project']."PBL";
 			 $this -> updateOrder(0);
 			 $us->setid(0);
-			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().")";
+			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT, DONEPERCENT, APPROVED, REASON) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().", ".$us->getdonepercent().", '".$us->getapproved()."', '".$us->getreason()."')";
 			 $dbcon->exec($sql);
 		}
 	}

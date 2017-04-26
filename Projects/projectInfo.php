@@ -8,7 +8,10 @@ class UserStoryInfo{
 	var $accept = null;
 	var $size = null;
 	var $sprint = 0;
-	public function __construct($pos,$as,$iw,$ino,$acc,$si,$spr){
+	var $donepercent = 0;
+	var $approved = null;
+	var $reason = null;
+	public function __construct($pos,$as,$iw,$ino,$acc,$si,$spr,$dp,$app,$re){
 		$this-> id = $pos;
 		$this-> asa = $as;
 		$this-> iwant = $iw;
@@ -16,6 +19,9 @@ class UserStoryInfo{
 		$this-> accept = $acc;
 		$this-> size = $si;
 		$this-> sprint = $spr;
+		$this-> donepercent = $dp;
+		$this-> approved = $app;
+		$this-> reason = $re;
 	}
 
 	public function setid($i){
@@ -70,6 +76,30 @@ class UserStoryInfo{
 	
 	public function getsprint(){
 		return $this->sprint;
+	}
+	
+	public function setdonepercent($dp){
+		$this-> donepercent = $dp;
+	}
+	
+	public function getdonepercent(){
+		return $this->donepercent;
+	}
+	
+	public function setapproved($app){
+		$this -> approved = $app;
+	}
+	
+	public function getapproved(){
+		return $this->approved;
+	}
+	
+	public function setreason($re){
+		$this->reason = $re;
+	}
+	
+	public function getreason(){
+		return $this->reason;
 	}
 }
 

@@ -29,7 +29,7 @@
 				</tr>
 				<tr>
 					<td>Location:<br>0:product backlog<br>1:sprint 1<br>etc...</td>
-					<td><input type="size" name="sprint" value ="0" readonly></td>
+					<td><input type="text" name="sprint" value ="0" readonly></td>
 				</tr>
 			</tbody>		
 		</table>		

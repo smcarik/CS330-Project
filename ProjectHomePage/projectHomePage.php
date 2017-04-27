@@ -42,17 +42,21 @@
 			</tr>
 			<tr>
 				<td>
+				<?php ?>
 					<div class="card">
 						<div class="container">
-							<h4><b>Architect & Engineer</b></h4>
+							<h4>
+								<b>Architect & Engineer</b>
+							</h4>
 							<p>
-								Testing
+								<button
+									onclick="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
+									Edit User Story
+								</button>
 							</p>
 						</div>
 					</div>
-					<p>
-					
-					</p>
+					<p></p>
 				</td>
 			</tr>
 			<tr>

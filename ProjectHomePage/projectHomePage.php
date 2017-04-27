@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
-
 <title>Project Home Page</title>
 <style>
 .card {

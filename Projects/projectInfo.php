@@ -1,5 +1,4 @@
 <?php
-
 class UserStoryInfo{
 	var $id = 0;
 	var $asa= null;
@@ -102,5 +101,4 @@ class UserStoryInfo{
 		return $this->reason;
 	}
 }
-
 ?>

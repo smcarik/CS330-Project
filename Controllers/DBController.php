@@ -61,7 +61,7 @@
 			$dbcon = $this->setUpDB();
 			if($position == 0){
 				echo $_SESSION['project'];
-				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL";
+				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL order by ID desc";
 				foreach($dbcon->query($sql0)as $row){
 					$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
 					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($us->getid()+1)." WHERE ID = ".$us->getid();

@@ -54,8 +54,7 @@ img {
 				</td>
 				<td>
 					<div class="w3-container">
-					  <h2>Cards</h2>
-					  <div class="w3-orange w3-card w3-hover-shadow-yellow-text-blue"><h4>does this work?</h4></div>
+					  <div class="w3-orange w3-card w3-hover-shadow><h4>does this work?</h4></div>
 					</div>
 				</td>
 			</tr>

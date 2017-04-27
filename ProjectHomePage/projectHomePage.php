@@ -30,7 +30,11 @@
     <?php
     include __DIR__.'\..\Controllers\DBController.php';
     //session_start();
-    $_SESSION['project'] = "".$_POST['prjName'].""; // create a session variable for the current project
+    if(isset($_POST['prjName']))
+    {
+    	$_SESSION['project'] == "".$_POST['prjName'].""; 
+    }
+    // create a session variable for the current project
     $db = new ContactDB;
     $projectPBL = $db->getAllProductBacklogItems();
 	echo "Project:". $_SESSION['project'];

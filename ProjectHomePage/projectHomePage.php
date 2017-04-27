@@ -7,18 +7,18 @@
 <title>Project Home Page</title>
 <style>
 .card {
-    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 40%;
-    background: #00BFEA;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	width: 100%;
+	background: #00BFEA;
 }
 
 .card:hover {
-    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
 }
 
 .container {
-    padding: 2px 16px;
+	padding: 2px 16px;
 }
 </style>
 </head>
@@ -42,6 +42,21 @@
 			</tr>
 			<tr>
 				<td>
+					<div class="card">
+						<div class="container">
+							<h4><b>Architect & Engineer</b></h4>
+							<p>
+								Testing
+							</p>
+						</div>
+					</div>
+					<p>
+					
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td>
 					<form method="POST"
 						action="/CS330-Project/CreateUserStory/CreateNewUS.php">
 						<input type="Submit" value="create new user story"
@@ -57,16 +72,6 @@
 			</tr>
 
 		</tbody>
-
-		<div class="card">
-			<div class="container">
-				<h4>
-					<b>John Doe</b>
-				</h4>
-				<p>Architect & Engineer</p>
-			</div>
-		</div>
-		
 	</table>
 </body>
 </html>

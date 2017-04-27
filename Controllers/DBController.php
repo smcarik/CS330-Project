@@ -259,5 +259,28 @@
 			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT, DONEPERCENT, APPROVED, REASON) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().", ".$us->getdonepercent().", '".$us->getapproved()."', '".$us->getreason()."')";
 			 $dbcon->exec($sql);
 		}
+		public function getAllProductBacklogItems(){
+			$dbcon = $this->setUpDB();	
+			$pbl = $_SESSION['project'] . "PBL";
+			$sql = "SELECT * FROM ". $pbl;
+			$list = new ArrayObject();
+			foreach($dbcon->query($sql) as $row){
+				$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
+				$list.append($us);
+			}
+			return $list;
+		}
+		public function getAllSprintBacklogItems($sprintNumber){
+			$dbcon = $this->setUpDB();
+			$pbl = $_SESSION['project'] . "PBL";
+			$sql = "SELECT * FROM ". $pbl." WHERE SPRINT = '".$sprintNumber."'";
+			$list = new ArrayObject();
+			foreach($dbcon->query($sql) as $row){
+				$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
+				$list.append($us);
+			}
+			return $list;
+		}
+		
 	}
 ?>

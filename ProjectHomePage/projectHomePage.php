@@ -2,6 +2,7 @@
 <html>
 <head>
  	 <link rel="stylesheet" href="styles.css">
+ 	 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <meta http-equiv="Content-Type" content="text/html; charset=Cp1252">
 
 <title>Project Home Page</title>
@@ -48,8 +49,13 @@ img {
 				<td><div class="card">
   					<div class="container">
     				<h4><b>This is a card</b></h4> 
-    				<p>Card!!</p> 
   					</div>
+					</div>
+				</td>
+				<td>
+					<div class="w3-container">
+					  <h2>Cards</h2>
+					  <div class="w3-orange w3-card w3-hover-shadow-yellow-text-blue"><h4>does this work?</h4></div>
 					</div>
 				</td>
 			</tr>

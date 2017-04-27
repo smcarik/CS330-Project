@@ -1,5 +1,6 @@
 <?php
 	include __DIR__.'\..\Users\UserInfo.php';
+	include __DIR__.'\..\Projects\projectinfo.php';
 	session_start();
 	class ContactDB
 	{
@@ -266,7 +267,7 @@
 			$list = new ArrayObject();
 			foreach($dbcon->query($sql) as $row){
 				$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
-				$list.append($us);
+				$list->append($us);
 			}
 			return $list;
 		}
@@ -277,7 +278,7 @@
 			$list = new ArrayObject();
 			foreach($dbcon->query($sql) as $row){
 				$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
-				$list.append($us);
+				$list->append($us);
 			}
 			return $list;
 		}

@@ -26,6 +26,15 @@
 				<td>Tasks Completed</td>
 			</tr>
 			<tr>
+				<td><div class="card">
+  					<div class="container">
+    				<h4><b>This is a card</b></h4> 
+    				<p>Card!!</p> 
+  					</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
 			<td>
 				<form method="POST" action="/CS330-Project/CreateUserStory/CreateNewUS.php">
 					<input type ="Submit" value="create new userstory" name ="create new userstory">

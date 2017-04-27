@@ -28,48 +28,55 @@
 <body>
 	<h1>Project Home Page</h1>
     <?php
-    include __DIR__.'\..\Controllers\DBController.php';
-    //session_start();
-    if(isset($_POST['prjName']))
-    {
-    	$_SESSION['project'] = "".$_POST['prjName'].""; 
-    }
-    // create a session variable for the current project
-    
-	echo "Project:". $_SESSION['project'];
-	$db = new ContactDB;
-	$projectPBL = $db->getAllProductBacklogItems();
+				include __DIR__ . '\..\Controllers\DBController.php';
+				// session_start();
+				if (isset ( $_POST ['prjName'] )) {
+					$_SESSION ['project'] = "" . $_POST ['prjName'] . "";
+				}
+				// create a session variable for the current project
+				
+				echo "Project:" . $_SESSION ['project'];
+				$db = new ContactDB ();
+				$projectPBL = $db->getAllProductBacklogItems ();
 				?>
 	
-	    <table class="dataentrytable" border="1">
+	    <table style = "width:75%" class="dataentrytable" border="1">
 		<tbody>
 			<tr>
-				<td>Product Backlog</td>
-				<td>Sprint Backlog</td>
-				<td>Tasks To Do</td>
-				<td>Tasks In Progress</td>
-				<td>Tasks Completed</td>
+				<th>Product Backlog</th>
+				<th>Sprint Backlog</th>
+				<th>Tasks To Do</th>
+				<th>Tasks In Progress</th>
+				<th>Tasks Completed</th>
 			</tr>
 			<tr>
-				<td></td>
-
 				<td>
-				<?php foreach($projectPBL as $pblProj){ ?>
+								<?php foreach($projectPBL as $pblProj){ ?>
 					<div class="card">
 						<div class="container">
+						<?php echo "ID: ".$pblProj->getid()?>
+								<br>
 							<?php echo "Size: ".$pblProj->getsize()?>
+								<br>
 								<br>
 								<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
 								<br>
+								<br>
 								<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
+								<br>
 								<button
-									onclick="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
-									Edit User Story</button>
+								onclick="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
+								Edit User Story</button><br>
 						</div>
 					</div>
 					<p></p>
 										<?php } ?>
 				</td>
+
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
 			</tr>
 			<tr>
 				<td>

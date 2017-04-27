@@ -10,10 +10,10 @@
 
 .card {
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-    transition: 0.3s;
-    width: 40%;
     border-radius: 15px;
-    background: rgba(255,255,0,1);
+	transition: 0.3s;
+	width: 100%;
+	background: #00BFEA;
 }
 
 .card:hover {
@@ -52,6 +52,24 @@
     				<h4><b>This is a card</b></h4> 
   					</div>
 					</div>
+				</td>
+
+				<td>
+				<?php ?>
+					<div class="card">
+						<div class="container">
+							<h4>
+								<b>Architect & Engineer</b>
+							</h4>
+							<p>
+								<button
+									onclick="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
+									Edit User Story
+								</button>
+							</p>
+						</div>
+					</div>
+					<p></p>
 				</td>
 			</tr>
 			<tr>

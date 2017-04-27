@@ -6,12 +6,12 @@ try
 {
 	$db = new ContactDB();
 	$db -> addItemToBacklog($userStory);
-	header('/CS330-Project/ProjectHomePage/projectHomePage.php');
+	header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 }
 catch (PDOException $e)
 {
 	echo $e;
-	//header('/CS330-Project/ProjectHomePage/projectHomePage.php');
+	header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 }
 
 ?>

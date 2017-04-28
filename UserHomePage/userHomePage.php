@@ -14,7 +14,7 @@
     $user = $_SESSION['User']->getUName();
     $db = new ContactDB;
     $projectNames = $db->getAllProjectsForUser($user);
-    echo "<h3> Welcome, $user, to the user home page. Here are the projects that you are a member of: </h3>"
+    echo "<h2> Welcome, $user, to the user home page. Here are the projects that you are a member of: </h2>"
     ?>
    <!-- <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php"> -->
 	    <table>

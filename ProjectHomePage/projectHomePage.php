@@ -91,7 +91,7 @@
 					</form>
 				</td>
 				<td></td>
-				<td><button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php'">Invite User to Project</button></td>
+				<td><button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php">Invite User to Project</button></td>
 				<td></td>
 				<td></td>
 			</tr>

@@ -98,9 +98,16 @@
 		public function getlastid(){
 			$dbcon=$this->setUpDB();
 			$sql = "Select * from ".$_SESSION['project']."PBL order by ID desc";
-			$last=0;
 			foreach($dbcon->query($sql)as $row){
 				return $row['ID'];
+			}
+		}
+		
+		public function getNumberOfSprints(){
+			$dbcon=$this->setUpDB();
+			$sql = "Select * from ".$_SESSION['project']."PBL order by SPRINT desc";
+			foreach($dbcon->query($sql)as $row){
+				return $row['SPRINT'];
 			}
 		}
 		

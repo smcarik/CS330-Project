@@ -6,6 +6,12 @@
 <title>Create User Story</title>
 </head>
     <body>
+    <?php 
+    	if($_SESSION['Error']!= "none"){
+    		echo $_SESSION['Error'];
+    		$_SESSION['Error'] = "none";
+    	}
+    ?>
     	<form action="createNewUS_Action.php" method="POST">
 		<table>
 			<tbody>

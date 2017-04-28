@@ -28,64 +28,56 @@
 <body>
 	<h1>Project Home Page</h1>
     <?php
-				include __DIR__ . '\..\Controllers\DBController.php';
-				// session_start();
-				if (isset ( $_POST ['prjName'] )) {
-					$_SESSION ['project'] = "" . $_POST ['prjName'] . "";
-				}
-				// create a session variable for the current project
-				
-				echo "Project:" . $_SESSION ['project'];
-				$db = new ContactDB ();
-				$projectPBL = $db->getAllProductBacklogItems ();
+    include __DIR__.'\..\Controllers\DBController.php';
+    //session_start();
+    if(isset($_POST['prjName']))
+    {
+    	$_SESSION['project'] = "".$_POST['prjName'].""; 
+    }
+    // create a session variable for the current project
+    
+	echo "Project:". $_SESSION['project'];
+	$db = new ContactDB;
+	$projectPBL = $db->getAllProductBacklogItems();
 				?>
 	
-	    <table style = "width:75%" class="dataentrytable" border="1">
+	    <table class="dataentrytable" border="1">
 		<tbody>
 			<tr>
-				<th>Product Backlog</th>
-				<th>Sprint Backlog</th>
-				<th>Tasks To Do</th>
-				<th>Tasks In Progress</th>
-				<th>Tasks Completed</th>
+				<td>Product Backlog</td>
+				<td>Sprint Backlog</td>
+				<td>Tasks To Do</td>
+				<td>Tasks In Progress</td>
+				<td>Tasks Completed</td>
 			</tr>
 			<tr>
+				<td></td>
+
 				<td>
-					<?php foreach($projectPBL as $pblProj){ ?>
+				<?php foreach($projectPBL as $pblProj){ ?>
 					<div class="card">
 						<div class="container">
-						<?php echo "ID: ".$pblProj->getid()?>
-								<br>
+							<?php echo "ID: ".$pblProj->getid();?>
+							<br>
 							<?php echo "Size: ".$pblProj->getsize()?>
-								<br>
 								<br>
 								<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
 								<br>
-								<br>
 								<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
-								<br>
-							<form method="POST" action="\CS330-Project\editUserStory\editUserStory.php">
-								<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
-								<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
-								<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
-								<input type="hidden" name="iwantto" value=<?php echo "\"".$pblProj->getiwant()."\""?>>
-								<input type="hidden" name="sothat" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
-								<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
-								<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getsprint()."\""?>>
-
-									<input name="Edit User Story" value = "Edit User Story" type="Submit">
+								<button
+									onclick="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
+									Edit User Story</button>
+								<?php if($pblProj->getid()==0){?>
+									<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
+										<input type = "text" name ="pos" value = "enter position">
+										<input type = "Submit" Value ="Move Item">
 									</form>
-								<br>
+									<?php } ?>
 						</div>
 					</div>
 					<p></p>
 										<?php } ?>
 				</td>
-
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
 			</tr>
 			<tr>
 				<td>
@@ -105,5 +97,13 @@
 
 		</tbody>
 	</table>
+	<?php 
+    	if($_SESSION['Error']!= "none"){
+    		echo $_SESSION['Error'];
+    		$_SESSION['Error'] = "none";
+    	}
+    	
+    	echo "Last id is: ".$db->getlastid();
+    ?>
 </body>
 </html>

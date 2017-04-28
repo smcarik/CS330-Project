@@ -4,13 +4,18 @@ $userStory = new UserStoryInfo($_POST['id'],$_POST['asa'],$_POST['iwant'],$_POST
 try 
 {
 	$db = new ContactDB();
-	$db -> addItemToBacklog($userStory);
-	header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
+	$succeed = $db -> addItemToBacklog($userStory);
+	if($succeed){
+		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
+	}
+	else{
+		$_SESSION['Error'] = " Failed to add item to project";
+		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
+	}
 }
 catch (PDOException $e)
 {
 	echo $e;
-	header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 }
 
 ?>

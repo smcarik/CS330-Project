@@ -51,8 +51,6 @@
 				<td>Tasks Completed</td>
 			</tr>
 			<tr>
-				<td></td>
-
 				<td>
 				<?php foreach($projectPBL as $pblProj){ ?>
 					<div class="card">

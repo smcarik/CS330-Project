@@ -85,7 +85,9 @@
 					<?php } ?>
 				</td>
 				<td>
-					<?php foreach($projectPBL as $pblProj){ ?>
+					<?php foreach($projectPBL as $pblProj){ 
+					
+						if($pbl->getSprint()==1){?>
 						
 						<div class="card">
 							<div class="container">
@@ -110,7 +112,8 @@
 											<input type = "text" name ="pos" value = "enter position">
 											<input type = "Submit" Value ="Move Item">
 										</form>
-									<?php } ?>
+									<?php } 
+								}?>
 								</div>
 							</div>
 						<p></p>

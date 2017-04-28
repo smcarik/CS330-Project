@@ -61,14 +61,14 @@
 								<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
 								<br>
 								<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
-								<form method="POST" action="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
+								<form method="POST" action="/CS330-Project/editUserStory/editUserStory.php">
 						    			<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
 						    			<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
 						    			<input type="hidden" name="iwanto" value=<?php echo "\"".$pblProj->getiwant()."\""?>>
 						    			<input type="hidden" name="sothat" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
 						    			<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
 						    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
-						    			<input name="Edit" type="Submit"></td> 
+						    			<input name="Edit" value="Edit" type="Submit">
 	    						</form>								
 								<?php if($pblProj->getid()==0){?>
 									<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
@@ -103,8 +103,6 @@
     		echo $_SESSION['Error'];
     		$_SESSION['Error'] = "none";
     	}
-
-    	echo "Last id is: ".$db->getlastid();
     ?>
 </body>
 </html>

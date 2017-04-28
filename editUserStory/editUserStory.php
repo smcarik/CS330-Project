@@ -18,27 +18,27 @@
 				<tr>
 					<td>Description:</td>
 					<td>As a 
-					<input type="text" name="asa" value= <?php echo $_POST ['asa']?> readonly>
+					<input type="text" name="asa" value= <?php echo $_POST ['asa']?> >
 					
 					I want to/should be able to 
 					
-					<input type="text" name="iwantto" value= <?php echo $_POST ['iwantto']?> readonly>
+					<input type="text" name="iwantto" value= <?php echo $_POST ['iwantto']?> >
 					
 					in order to 
-					<input type="text" name="inorder" value= <?php echo $_POST ['sothat']?> readonly>
+					<input type="text" name="inorder" value= <?php echo $_POST ['sothat']?> >
 					
 					</td>
 				</tr>
 				<tr>
 					<td>Acceptance Criteria:</td>
 					<td>
-					<input type="text" name="accpt" value= <?php echo $_POST ['acpt']?> readonly>
+					<input type="text" name="accpt" value= <?php echo $_POST ['acpt']?> >
 					</td>
 				</tr>
 				<tr>
 					<td>Size:</td>
 					<td>
-						<input type="text" name="size" value= <?php echo $_POST ['size']?> readonly>
+						<input type="text" name="size" value= <?php echo $_POST ['size']?> >
 					</td>
 				</tr>
 				<tr>

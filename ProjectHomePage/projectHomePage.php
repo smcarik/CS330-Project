@@ -26,21 +26,20 @@
 </style>
 </head>
 <body>
-	<h1>Project Home Page</h1>
     <?php
     include __DIR__.'\..\Controllers\DBController.php';
     //session_start();
     if(isset($_POST['prjName']))
     {
-    	$_SESSION['project'] = "".$_POST['prjName'].""; 
+    	$_SESSION['project'] = "".$_POST['prjName']."";
     }
     // create a session variable for the current project
-    
-	echo "Project:". $_SESSION['project'];
+
+	echo "<h1> Project: ". $_SESSION['project']."</h1>";
 	$db = new ContactDB;
 	$projectPBL = $db->getAllProductBacklogItems();
 				?>
-	
+
 	    <table class="dataentrytable" border="1">
 		<tbody>
 			<tr>
@@ -96,15 +95,15 @@
 				<td></td>
 				<td></td>
 			</tr>
-
 		</tbody>
 	</table>
-	<?php 
+	<button onclick="window.location.href='/../CS330-Project/UserHomePage/userHomePage.php'">Back</button>
+	<?php
     	if($_SESSION['Error']!= "none"){
     		echo $_SESSION['Error'];
     		$_SESSION['Error'] = "none";
     	}
-    	
+
     	echo "Last id is: ".$db->getlastid();
     ?>
 </body>

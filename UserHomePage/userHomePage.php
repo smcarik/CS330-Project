@@ -7,14 +7,14 @@
 </head>
 
     <body>
-    <?php   
+    <?php
     include __DIR__.'\..\Controllers\DBController.php';
     //session_start();
     $_SESSION['project'] = "none";
     $user = $_SESSION['User']->getUName();
     $db = new ContactDB;
     $projectNames = $db->getAllProjectsForUser($user);
-    echo "Welcome, $user, to the user home page. Here are the projects that you are a member of:"
+    echo "<h3> Welcome, $user, to the user home page. Here are the projects that you are a member of: </h3>"
     ?>
    <!-- <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php"> -->
 	    <table>
@@ -22,9 +22,9 @@
 		    foreach($projectNames as $proj){?>
 		    <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php">
 	    		<tr>
-	    			<td><?php echo $proj["projectName"]?></td> 
-	    			<td><input type="hidden" name="prjName" value=<?php echo "\"".$proj["projectName"]."\""?>></td> 
-	    			<td><input name="view" value = "view" type="Submit"></td> 
+	    			<td><?php echo $proj["projectName"]?></td>
+	    			<td><input type="hidden" name="prjName" value=<?php echo "\"".$proj["projectName"]."\""?>></td>
+	    			<td><input name="view" value = "view" type="Submit"></td>
 	    		</tr>
 	    	</form>
 	    	<?php
@@ -35,9 +35,6 @@
 		<input name="Create new Project" value = "Create new Project" type="Submit">
 	</form>
 	<button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php'">Invite</button>
-	
+
     </body>
 </html>
-
-	
-	

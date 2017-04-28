@@ -14,9 +14,10 @@
     $user = $_SESSION['User']->getUName();
     $db = new ContactDB;
     $projectNames = $db->getAllProjectsForUser($user);
-    echo "<h2> Welcome, $user, to the user home page. Here are the projects that you are a member of: </h2>"
+    echo "<h2> Welcome, $user, to the user home page. </h2>"
     ?>
    <!-- <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php"> -->
+   <h3> Here are the projects that you are a member of: </h3>
 	    <table>
 		    <?php
 		    foreach($projectNames as $proj){?>
@@ -24,7 +25,7 @@
 	    		<tr>
 	    			<td><?php echo $proj["projectName"]?></td>
 	    			<td><input type="hidden" name="prjName" value=<?php echo "\"".$proj["projectName"]."\""?>></td>
-	    			<td><input name="view" value = "view" type="Submit"></td>
+	    			<td><input name="view" value = "View" type="Submit"></td>
 	    		</tr>
 	    	</form>
 	    	<?php
@@ -32,9 +33,9 @@
 	    </table>
     <!-- </form> -->
 	<form method="POST" action="\CS330-Project\createProject\createProject.php">
-		<input name="Create new Project" value = "Create new Project" type="Submit">
+		<input name="Create new Project" value = "Create New Project" type="Submit">
 	</form>
-	<button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php'">Invite</button>
+	<button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php">Invite</button>
 
     </body>
 </html>

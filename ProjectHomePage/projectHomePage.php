@@ -45,8 +45,8 @@
 		<tbody>
 			<tr>
 				<td>Product Backlog</td>
-				<?php for($i =0; $i<$numSprints; $i++){
-						 echo "<td>Sprint".$i. "Backlog</td>";
+				<?php for($i =1; $i<=$numSprints; $i++){
+						 echo "<td>Sprint #".$i. " Backlog</td>";
 						}?>
 				<td>Tasks To Do</td>
 				<td>Tasks In Progress</td>

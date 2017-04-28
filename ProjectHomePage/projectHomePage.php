@@ -10,7 +10,7 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 15px;
 	transition: 0.3s;
-	width: 100%;
+	width: 60%;
 	background: #00BFEA;
 }
 
@@ -62,9 +62,15 @@
 								<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
 								<br>
 								<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
-								<button
-									onclick="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
-									Edit User Story</button>
+								<form method="POST" action="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
+						    			<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
+						    			<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
+						    			<input type="hidden" name="iwanto" value=<?php echo "\"".$pblProj->getiwant()."\""?>>
+						    			<input type="hidden" name="sothat" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
+						    			<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
+						    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
+						    			<input name="Edit" type="Submit"></td> 
+	    						</form>								
 								<?php if($pblProj->getid()==0){?>
 									<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
 										<input type = "text" name ="pos" value = "enter position">
@@ -86,9 +92,7 @@
 					</form>
 				</td>
 				<td></td>
-				<td><button
-						onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php'">Create
-						a Task</button></td>
+				<td><button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php'">Invite User to Project</button></td>
 				<td></td>
 				<td></td>
 			</tr>

@@ -3,6 +3,7 @@
 	include __DIR__.'\..\Controllers\DBController.php';
 	
 	try{
+		
 		$db = new contactDB;
 		$lastid = $db->getlastid();
 		if($lastid>=$_POST['pos']){

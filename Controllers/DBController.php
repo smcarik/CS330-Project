@@ -73,17 +73,34 @@
 				$proj;
 				foreach($dbcon->query($sql) as $row){
 					$proj = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
+					$dbcon->exec("UPDATE ".$_SESSION['project']."PBL SET ID = 9999999 WHERE ID = ".$proj->getid());
 				}
-				$proj->setid(9999999999);
 				$sql1 = "Select * from ".$_SESSION['project']."PBL where ID<=".$position." && ID>0";
 				foreach($dbcon->query($sql1) as $row){
 					$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
 					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($pro->getid()-1)." WHERE ID = ".$pro->getid();
 					$dbcon->exec($sqlu);
 				}
-				$proj->setid($position);
-				$sqlup = "UPDATE ".$_SESSION['project']."PBL SET ID = ".$proj->getid()." WHERE ID = 9999999999";
+				$sqlup = "UPDATE ".$_SESSION['project']."PBL SET ID = ".$position." WHERE ID = 9999999";
 				$dbcon->exec($sqlup);
+				foreach($dbcon->query("Select * from ".$_SESSION['project']."PBL where id =".$position)as $row)
+				{
+					if($row['ASA']==$proj->getasa()&&$row['IWANT']==$proj->getiwant()&&$row['INORDERTO']==$proj->getinorderto()){
+						return true;
+					}
+					else{
+						return false;
+					}
+				}
+			}
+		}
+		
+		public function getlastid(){
+			$dbcon=$this->setUpDB();
+			$sql = "Select * from ".$_SESSION['project']."PBL order by ID desc";
+			$last=0;
+			foreach($dbcon->query($sql)as $row){
+				return $row['ID'];
 			}
 		}
 		
@@ -259,6 +276,14 @@
 			 $us->setid(0);
 			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT, DONEPERCENT, APPROVED, REASON) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().", ".$us->getdonepercent().", '".$us->getapproved()."', '".$us->getreason()."')";
 			 $dbcon->exec($sql);
+			 foreach($dbcon->query("SELECT * FROM ".$_SESSION['project']."PBL where id = 0")as $row){
+			 	if($row['ASA']==$us->getasa()&&$row['IWANT']==$us->getiwant()&&$row['INORDERTO']==$us->getinorderto()){
+			 		return true;
+			 	}
+			 	else{
+			 		return false;
+			 	}
+			 }
 		}
 		public function getAllProductBacklogItems(){
 			$dbcon = $this->setUpDB();	

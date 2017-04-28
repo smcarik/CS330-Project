@@ -51,7 +51,7 @@
 			</tr>
 			<tr>
 				<td>
-								<?php foreach($projectPBL as $pblProj){ ?>
+					<?php foreach($projectPBL as $pblProj){ ?>
 					<div class="card">
 						<div class="container">
 						<?php echo "ID: ".$pblProj->getid()?>
@@ -64,9 +64,18 @@
 								<br>
 								<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
 								<br>
-								<button
-								onclick="window.location.href='/../CS330-Project/editUserStory/editUserStory.php'">
-								Edit User Story</button><br>
+							<form method="POST" action="\CS330-Project\editUserStory\editUserStory.php">
+								<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
+								<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
+								<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
+								<input type="hidden" name="iwantto" value=<?php echo "\"".$pblProj->getiwant()."\""?>>
+								<input type="hidden" name="sothat" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
+								<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
+								<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getsprint()."\""?>>
+
+									<input name="Edit User Story" value = "Edit User Story" type="Submit">
+									</form>
+								<br>
 						</div>
 					</div>
 					<p></p>

@@ -5,10 +5,10 @@
 	class ContactDB
 	{
 		public function __construct(){
-			
+
 		}
 		protected $dbcon = null;
-		
+
 		function setUpDB(){
 			try {
 				$dbcon = new PDO(
@@ -25,7 +25,7 @@
 				header('Location: Login.php');
 			}
 		}
-		
+
 		function addIfUnique($newProjectName, $newProjectDescription){ //adds a new project to the project table if the name is unique
 			if($newProjectName == null){
 				return false;
@@ -36,13 +36,13 @@
 				$dbcon->exec($sql);
 				$success = $this->addUserToProject($_SESSION['User']->getUName(),$newProjectName);
 				if($this->getProject($newProjectName) && $success){
-					$sql1 = "CREATE TABLE ".$newProjectName."PBL 
-							(ID INT NOT NULL DEFAULT 0, 
-							ASA LONGTEXT NOT NULL, 
-							IWANT LONGTEXT NOT NULL, 
-							INORDERTO LONGTEXT NOT NULL, 
-							ACCEPT LONGTEXT NOT NULL, 
-							SIZE CHAR (1) NOT NULL, 
+					$sql1 = "CREATE TABLE ".$newProjectName."PBL
+							(ID INT NOT NULL DEFAULT 0,
+							ASA LONGTEXT NOT NULL,
+							IWANT LONGTEXT NOT NULL,
+							INORDERTO LONGTEXT NOT NULL,
+							ACCEPT LONGTEXT NOT NULL,
+							SIZE CHAR (1) NOT NULL,
 							SPRINT INT NOT NULL DEFAULT 0,
 							DONEPERCENT INT NOT NULL DEFAULT 0,
 							APPROVED BOOLEAN DEFAULT FALSE,
@@ -56,7 +56,7 @@
 				return false;
 			}
 		}
-		
+
 		public function updateOrder($position){
 			$dbcon = $this->setUpDB();
 			if($position == 0){
@@ -94,7 +94,7 @@
 				}
 			}
 		}
-		
+
 		public function getlastid(){
 			$dbcon=$this->setUpDB();
 			$sql = "Select * from ".$_SESSION['project']."PBL order by ID desc";
@@ -102,7 +102,7 @@
 				return $row['ID'];
 			}
 		}
-		
+
 		public function getNumberOfSprints(){
 			$dbcon=$this->setUpDB();
 			$sql = "Select * from ".$_SESSION['project']."PBL order by SPRINT desc";
@@ -110,18 +110,18 @@
 				return $row['SPRINT'];
 			}
 		}
-		
+
 		public function addUserToProject($username, $proj){
 			$dbcon = $this->setUpDB();
 			$sql = "INSERT INTO UserProjectInfo (username, projectName) VALUES ('".$username."', '".$proj."')";
-			
+
 			if($this->isProjectMember($username,$proj)){
 				$_SESSION['Error'] = "user: ".$username." Is already part of project";
 				return false;
 			}
 			try{
 				$dbcon->exec($sql);
-				
+
 				if($this->isProjectMember($username,$proj)){
 					return true;
 				}
@@ -133,7 +133,7 @@
 				return false;
 			}
 		}
-		
+
 		public function getProject($projname){
 			$dbcon = $this->setUpDB();
 			$sql = "SELECT * from ProjectInfo where Name = '".$projname."'";
@@ -149,7 +149,7 @@
 				echo "Connection Failed: " . $e->getMessage();
 			}
 		}
-		
+
 		public function getAllProjectsForUser($user){
 			$dbcon = $this->setUpDB();
 			$sql = "SELECT * from UserProjectInfo WHERE username = '".$user."'";
@@ -161,27 +161,27 @@
 			}
 			return "NONE";
 		}
-				
+
 		public function registerUser($fName, $lName, $uName, $pWord)
 		{
 			$dbcon = $this->setUpDB();
 			$taken = false;
 			$cnt = 0;
-			
+
 			$sql = "SELECT * FROM UserInfo";
-			
+
 			try{
-				foreach($dbcon->query($sql) as $row) 
+				foreach($dbcon->query($sql) as $row)
 				{
-					if(strcmp($row["USERNAME"],$uName) == 0) 
+					if(strcmp($row["USERNAME"],$uName) == 0)
 					{
 						$taken = true;
 						break;
 					}
 					$cnt++;
 				}
-			
-				if(!$taken) 
+
+				if(!$taken)
 				{
 					$sql = "INSERT INTO UserInfo (FNAME, LNAME, PASSWORD, USERNAME) VALUES ('" . $fName . "', '"  . $lName  . "', '"  . $pWord  . "', '"  . $uName  . "')";
 					$dbcon->exec($sql);
@@ -192,9 +192,9 @@
 				echo "Connection Failed: " . $e->getMessage();
 			}
 			return false;
-			
+
 		}
-		
+
 		public function isProjectMember($username, $project){
 			$sql = "SELECT * FROM UserProjectInfo";
 			if(!$this->doesUsernameExist($username)){
@@ -207,7 +207,7 @@
 					if(strcmp($row["username"], $username) == 0 && strcmp($row["projectName"], $project) == 0){
 						return true;
 					}
-						
+
 				}
 			}
 			catch(PDOException $e) {
@@ -215,7 +215,7 @@
 			}
 			return false;
 		}
-		
+
 		public function doesUsernameExist($username){
 			$dbcon = $this->setUpDB();
 			$sql = "SELECT * FROM UserInfo";
@@ -224,7 +224,7 @@
 					if(strcmp($row["USERNAME"], $username) == 0){
 						return true;
 					}
-			
+
 				}
 			}
 			catch(PDOException $e) {
@@ -233,11 +233,11 @@
 			}
 			return false;
 		}
-		
-		
+
+
 		public function login($username, $password){
 			$dbcon = $this->setUpDB();
-			
+
 			$sql = "SELECT * FROM UserInfo";
 			$unamegood = $this->doesUsernameExist($username);
 			if(!$unamegood){
@@ -261,10 +261,10 @@
 				return false;
 			}
 		}
-		
+
 		public function inviteToProject($username, $proj){
 			 $dbcon = $this->setUpDB();
-			 
+
 			 if(!$this->isProjectMember($_SESSION['User']->getUName(), $proj)){
 			 	$_SESSION['Error'] = "Inviter is not part of project";
 			 	return false;
@@ -272,9 +272,9 @@
 			 else{
 			 	$this->addUserToProject($username,$proj);
 			 }
-			 
+
 		}
-		
+
 		public function addItemToBacklog($us){
 			 //$item = array("asa", "iwant", "inorderto", "accept", "size", "sprint");
 			 $dbcon = $this->setUpDB();
@@ -293,7 +293,7 @@
 			 }
 		}
 		public function getAllProductBacklogItems(){
-			$dbcon = $this->setUpDB();	
+			$dbcon = $this->setUpDB();
 			$pbl = $_SESSION['project'] . "PBL";
 			$sql = "SELECT * FROM ". $pbl;
 			$list = new ArrayObject();
@@ -314,6 +314,12 @@
 			}
 			return $list;
 		}
-		
+
+		public function editUserStory($us) {
+				$dbcon = $this->setUpDB();
+				$pbl = $_SESSION['project'] . "PBL";
+				$sql = "UPDATE " . $pbl . " SET ASA='".$us->getasa()."', IWANT='".$us->getiwant()."',  INORDERTO='".$us->getinorderto()."', ACCEPT='".$us->getaccept()."', SIZE='".$us->getsize()."', SPRINT='".$us->getSprint()."', DONEPERCENT=".$us->getdonepercent().", APPROVED='".$us->getapproved()."', REASON='".$us->getreason()."' WHERE ID=".$us.getid.";";
+ 			 	$dbcon->exec($sql);
+		}
 	}
 ?>

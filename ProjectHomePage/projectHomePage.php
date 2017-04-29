@@ -10,7 +10,7 @@
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
 	border-radius: 15px;
 	transition: 0.3s;
-	width: 60%;
+	width: 100%;
 	background: #00BFEA;
 }
 
@@ -87,7 +87,7 @@
 				<td>
 					<?php foreach($projectPBL as $pblProj){ 
 					
-						if($pbl->getSprint()==1){?>
+						if($pblProj->getSprint()==1){?>
 						
 						<div class="card">
 							<div class="container">
@@ -125,8 +125,8 @@
 				<td>
 					<form method="POST"
 						action="/CS330-Project/CreateUserStory/CreateNewUS.php">
-						<input type="Submit" value="create new userstory"
-							name="create new userstory">
+						<input type="Submit" value="create new user story"
+							name="create new user story">
 					</form>
 				</td>
 				<td></td>

@@ -84,41 +84,44 @@
 						<p></p>
 					<?php } ?>
 				</td>
-				<td>
-					<?php foreach($projectPBL as $pblProj){ 
+				<?php 
+					for($i =1; $i<=$numSprints; $i++){?>
+						<td>
+						<?php foreach($projectPBL as $pblProj){ 
 					
-						if($pblProj->getSprint()==1){?>
-						
-						<div class="card">
-							<div class="container">
-								<?php echo "ID: ".$pblProj->getid();?>
-								<br>
-								<?php echo "Size: ".$pblProj->getsize()?>
+							if($pblProj->getSprint()==$i){?>
+							
+							<div class="card">
+								<div class="container">
+									<?php echo "ID: ".$pblProj->getid();?>
 									<br>
-									<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
-									<br>
-									<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
-									<form method="POST" action="/CS330-Project/editUserStory/editUserStory.php">
-							    			<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
-							    			<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
-							    			<input type="hidden" name="iwantto" value=<?php echo "\"".$pblProj->getiwant()."\""?>>
-							    			<input type="hidden" name="sothat" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
-							    			<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
-							    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
-							    			<input name="Edit" value="Edit" type="Submit">
-		    						</form>								
-									<?php if($pblProj->getid()==0){?>
-										<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
-											<input type = "text" name ="pos" value = "enter position">
-											<input type = "Submit" Value ="Move Item">
-										</form>
-									<?php } 
+									<?php echo "Size: ".$pblProj->getsize()?>
+										<br>
+										<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
+										<br>
+										<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
+										<form method="POST" action="/CS330-Project/editUserStory/editUserStory.php">
+								    			<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
+								    			<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
+								    			<input type="hidden" name="iwantto" value=<?php echo "\"".$pblProj->getiwant()."\""?>>
+								    			<input type="hidden" name="sothat" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
+								    			<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
+								    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
+								    			<input name="Edit" value="Edit" type="Submit">
+			    						</form>								
+										<?php if($pblProj->getid()==0){?>
+											<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
+												<input type = "text" name ="pos" value = "enter position">
+												<input type = "Submit" Value ="Move Item">
+											</form>
+										<?php } 
 								}?>
 								</div>
 							</div>
 						<p></p>
 					<?php } ?>
-				</td>
+						</td>	
+				<?php }?>
 				
 			</tr>
 			<tr>

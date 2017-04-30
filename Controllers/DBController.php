@@ -319,11 +319,11 @@
 			return $list;
 		}
 
-		public function editUserStory($us) {
+		public function editUserStory($id, $asa, $iwant, $sothat, $acpt, $size) {
 				$dbcon = $this->setUpDB();
 				$pbl = $_SESSION['project'] . "PBL";
-				$sql = "UPDATE " . $pbl . " SET ASA='".$us->getasa()."', IWANT='".$us->getiwant()."',  INORDERTO='".$us->getinorderto()."', ACCEPT='".$us->getaccept()."', SIZE='".$us->getsize()."', SPRINT='".$us->getSprint()."', DONEPERCENT=".$us->getdonepercent().", APPROVED='".$us->getapproved()."', REASON='".$us->getreason()."' WHERE ID=".$us.getid.";";
- 			 	$dbcon->exec($sql);
+				$sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $sothat . "', ACCEPT='" . $acpt . "', SIZE=" . $size . " WHERE ID=" . $id;
+				$dbcon->exec($sql);
 		}
 	}
 ?>

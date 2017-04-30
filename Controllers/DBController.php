@@ -110,6 +110,10 @@
 				return $row['SPRINT'];
 			}
 		}
+		
+		public function getNumOfColsForProj(){
+			return getNumberOfSprints()+1+3;
+		}
 
 		public function addUserToProject($username, $proj){
 			$dbcon = $this->setUpDB();

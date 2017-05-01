@@ -112,7 +112,7 @@
 		}
 		
 		public function getNumOfColsForProj(){
-			return getNumberOfSprints()+1+3;
+			return $this->getNumberOfSprints()+1+3;
 		}
 
 		public function addUserToProject($username, $proj){

@@ -36,6 +36,10 @@
     // create a session variable for the current project
 
 	echo "<h1> Project: ". $_SESSION['project']."</h1>";
+	if($_SESSION['Error']!= "none"){
+		echo $_SESSION['Error'];
+		$_SESSION['Error'] = "none";
+	}
 	$db = new ContactDB;
 	$projectPBL = $db->getAllProductBacklogItems();
 	$numSprints = $db->getNumberOfSprints();
@@ -53,7 +57,7 @@
 				<td>Tasks Completed</td>
 			</tr>
 			<tr>
-				<td>
+				<td valign = "top">
 					<?php
 					foreach($projectPBL as $pblProj){ 
 						if($pblProj->getsprint()==0){
@@ -130,7 +134,14 @@
 							name="create new user story">
 					</form>
 				</td>
-				<td></td>
+				<?php for($j =1; $j<=$numSprints; $j++){?>
+				<td>
+					<form method = "POST" action = "/CS330-Project/MoveItemsToSprints/moveItemToSBL.php">
+						<input type = "hidden" name = "sprintnum" value = <?php echo "\"".$j."\""?>>
+						<input type = "Submit" value = "Pull item from pbl">
+					</form>
+				</td>
+				<?php }?>
 				<td><button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php">Invite User to Project</button></td>
 				<td></td>
 				<td></td>
@@ -138,11 +149,5 @@
 		</tbody>
 	</table>
 	<button onclick="window.location.href='/../CS330-Project/UserHomePage/userHomePage.php'">Back</button>
-	<?php
-    	if($_SESSION['Error']!= "none"){
-    		echo $_SESSION['Error'];
-    		$_SESSION['Error'] = "none";
-    	}
-    ?>
 </body>
 </html>

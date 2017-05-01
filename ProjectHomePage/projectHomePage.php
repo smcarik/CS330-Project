@@ -110,8 +110,8 @@
 								    			<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
 								    			<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
 								    			<input type="hidden" name="iwantto" value=<?php echo "\"".$pblProj->getiwant()."\""?>>
-								    			<input type="hidden" name="sothat" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
-								    			<input type="hidden" name="acpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
+								    			<input type="hidden" name="inorder" value=<?php echo "\"".$pblProj->getinorderto()."\""?>>
+								    			<input type="hidden" name="accpt" value=<?php echo "\"".$pblProj->getaccept()."\""?>>
 								    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
 								    			<input name="Edit" value="Edit" type="Submit">
 			    						</form>

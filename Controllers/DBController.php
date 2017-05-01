@@ -34,7 +34,7 @@
 			try{
 				$dbcon = $this->setUpDB();
 				$dbcon->exec($sql);
-				$success = $this->addUserToProject($_SESSION['User']->getUName(),$newProjectName);
+				$success = $this->addUserToProject($_SESSION['User']->getUName(),$newProjectName, 1);
 				if($this->getProject($newProjectName) && $success){
 					$sql1 = "CREATE TABLE ".$newProjectName."PBL
 							(ID INT NOT NULL DEFAULT 0,
@@ -142,9 +142,9 @@
 			return $this->getNumberOfSprints()+1+3;
 		}
 
-		public function addUserToProject($username, $proj){
+		public function addUserToProject($username, $proj, $accept){
 			$dbcon = $this->setUpDB();
-			$sql = "INSERT INTO UserProjectInfo (username, projectName) VALUES ('".$username."', '".$proj."')";
+			$sql = "INSERT INTO UserProjectInfo (username, projectName, accept) VALUES ('".$username."', '".$proj."',". $accept .")";
 
 			if($this->isProjectMember($username,$proj)){
 				$_SESSION['Error'] = "user: ".$username." Is already part of project";
@@ -183,7 +183,7 @@
 
 		public function getAllProjectsForUser($user){
 			$dbcon = $this->setUpDB();
-			$sql = "SELECT * from UserProjectInfo WHERE username = '".$user."'";
+			$sql = "SELECT * from UserProjectInfo WHERE username = '".$user."' AND ACCEPT=1";
 			try{
 				return $dbcon->query($sql);
 			}
@@ -296,12 +296,13 @@
 		public function inviteToProject($username, $proj){
 			 $dbcon = $this->setUpDB();
 
-			 if(!$this->isProjectMember($_SESSION['User']->getUName(), $proj)){
-			 	$_SESSION['Error'] = "Inviter is not part of project";
+			 if($this->isProjectMember($username, $proj)){
+			 	$_SESSION['Error'] = "Invitee is a part of project";
 			 	return false;
 			 }
 			 else{
-			 	$this->addUserToProject($username,$proj);
+			 	$this->addUserToProject($username,$proj, -1);
+				return true;
 			 }
 
 		}
@@ -373,6 +374,18 @@
 				else return false;
 			}
 
+		}
+
+		public function viewPending($user) {
+			$dbcon = $this->setUpDB();
+			$sql = "SELECT * from UserProjectInfo WHERE username = '".$user."' AND ACCEPT=-1";
+			try{
+				return $dbcon->query($sql);
+			}
+			catch(PDOException $e) {
+				echo "Connection Failed: " . $e->getMessage();
+			}
+			return "NONE";
 		}
 	}
 ?>

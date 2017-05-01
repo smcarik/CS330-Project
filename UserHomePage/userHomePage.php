@@ -14,6 +14,7 @@
     $user = $_SESSION['User']->getUName();
     $db = new ContactDB;
     $projectNames = $db->getAllProjectsForUser($user);
+    $pending = $db->viewPending($user);
     echo "<h2> Welcome, $user, to the user home page. </h2>"
     ?>
    <!-- <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php"> -->
@@ -31,6 +32,25 @@
 	    	<?php
 	    	}?>
 	    </table>
+      <!-- PENDING SHIT -->
+      <h3> Here are the projects that you are a pending member of: </h3>
+   	    <table>
+   		    <?php
+   		    foreach($pending as $proj){?>
+   	    		<tr>
+   	    			<td><?php echo $proj["projectName"]?></td>
+       		    <form method="POST" action="/CS330-Project/pending/accept.php">
+   	    			<td><input type="hidden" name="prjName" value=<?php echo "\"".$proj["projectName"]."\""?>></td>
+   	    			<td><input name="Accept" value = "Accept" type="Submit"></td>
+     	    	  </form>
+       		    <form method="POST" action="/CS330-Project/pending/reject.php">
+   	    			<td><input type="hidden" name="prjName" value=<?php echo "\"".$proj["projectName"]."\""?>></td>
+   	    			<td><input name="Reject" value = "Reject" type="Submit"></td>
+     	    	  </form>
+   	    		</tr>
+   	    	<?php
+   	    	}?>
+   	    </table>
     <!-- </form> -->
 	<form method="POST" action="\CS330-Project\createProject\createProject.php">
 		<input name="Create new Project" value = "Create New Project" type="Submit">

@@ -15,7 +15,7 @@ try
 		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 	}
 	//remove echos, set this function call equal to variable succeed and continue with checks and redirects.
-	$db->editUserStory($_POST ['id'], $_POST ['asa'],
+	$success = $db->editUserStory($_POST ['id'], $_POST ['asa'],
 		 $_POST ['iwantto'], $_POST ['sothat'],
 		 $_POST ['acpt'], $_POST ['size']);
 

@@ -110,10 +110,6 @@
 								    			<input name="Edit" value="Edit" type="Submit">
 			    						</form>								
 										<?php if($pblProj->getid()==0){?>
-											<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
-												<input type = "text" name ="pos" value = "enter position">
-												<input type = "Submit" Value ="Move Item">
-											</form>
 										<?php } 
 								}?>
 								</div>

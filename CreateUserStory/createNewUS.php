@@ -7,6 +7,7 @@
 </head>
     <body>
     <?php 
+    	session_start();
     	if($_SESSION['Error']!= "none"){
     		echo $_SESSION['Error'];
     		$_SESSION['Error'] = "none";
@@ -42,7 +43,6 @@
 		<input type="submit" value="Create">
 	</form>
     <?php
-    	session_start();
 		echo $_SESSION['project'];
 	?>
     </body>

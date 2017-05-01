@@ -7,17 +7,19 @@
 		$db = new contactDB;
 		$lastid = $db->getlastid();
 		if($lastid>=$_POST['pos']){
-			$succeed = $db->updateOrder($_POST['pos']);
+			$succeed = $db->updateOrder($_POST['pos'],$_POST['usid']);
 		}
 		else{
-			$succeed = $db->updateOrder($lastid);
+			$succeed = $db->updateOrder($lastid,$_POST['usid']);
 		}
 		
 		if($succeed){
 			header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 		}
 		else{
-			$_SESSION['Error'] = "Failed to adjust order";
+			if($_SESSION['Error']=="none"){
+				$_SESSION['Error'] = "Failed to adjust order";
+			}
 			header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 		}
 	}

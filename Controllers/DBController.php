@@ -57,48 +57,75 @@
 			}
 		}
 
-		public function updateOrder($position){
+		public function updateOrder($position, $usid){
 			$dbcon = $this->setUpDB();
-			if($position == 0){
-				echo $_SESSION['project'];
-				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL order by ID desc";
+			$proj;
+			//this if statement is for newly created User stories, takes all items in pbl and decrements then inserts new item.
+			if($usid == 9999998){
+				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL where ID>=".$position." order by ID desc";
 				foreach($dbcon->query($sql0)as $row){
 					$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
 					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($us->getid()+1)." WHERE ID = ".$us->getid();
 					$dbcon->exec($sqlu);
 				}
 			}
+			// this section is for if a user tries to move user story up, we are not allowing that right now
+			elseif($position<=$usid){
+				$_SESSION['Error'] = "Invalid location entered. Tip: you cannot move items up.";
+				return false;
+			}
+			//this section handles moving a user in the product backlog down to a new location
 			else{
-				$sql = "Select * from ".$_SESSION['project']."PBL WHERE ID = 0";
-				$proj;
+				$sql = "Select * from ".$_SESSION['project']."PBL WHERE ID = ".$usid;
 				foreach($dbcon->query($sql) as $row){
 					$proj = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
 					$dbcon->exec("UPDATE ".$_SESSION['project']."PBL SET ID = 9999999 WHERE ID = ".$proj->getid());
 				}
-				$sql1 = "Select * from ".$_SESSION['project']."PBL where ID<=".$position." && ID>0";
-				foreach($dbcon->query($sql1) as $row){
-					$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
-					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($pro->getid()-1)." WHERE ID = ".$pro->getid();
-					$dbcon->exec($sqlu);
+					$sql1 = "Select * from ".$_SESSION['project']."PBL where ID<=".$position." && ID>".$usid;
+					foreach($dbcon->query($sql1) as $row){
+						$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
+						$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($pro->getid()-1)." WHERE ID = ".$pro->getid();
+						$dbcon->exec($sqlu);
+					}
+					$sqlup = "UPDATE ".$_SESSION['project']."PBL SET ID = ".$position." WHERE ID = 9999999";
+					$dbcon->exec($sqlup);
+				//this section moves items up, commented out to prevent having items in sprint backlogs
+				// that have lower ids then in product backlog
+				/* elseif($position < $usid){
+					$sql2 = "SELECT * FROM ".$_SESSION['project']."PBL WHERE ID<".$usid." $$ ID>=".$position." order by ID desc";
+					foreach($dbcon->query($sql2) as $row){
+						$pro = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
+						$sqlu1 = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($pro->getid()+1)." WHERE ID = ".$pro->getid();
+						$dbcon->exec($sqlu1);
+					}
+					$sqlup = "UPDATE ".$_SESSION['project']."PBL SET ID = ".$position." WHERE ID = 9999999";
+					$dbcon->exec($sqlup);
+				} */
+			}
+			foreach($dbcon->query("Select * from ".$_SESSION['project']."PBL where id =".$position)as $row)
+			{
+				if($row['ASA']==$proj->getasa()&&$row['IWANT']==$proj->getiwant()&&$row['INORDERTO']==$proj->getinorderto()){
+					return true;
 				}
-				$sqlup = "UPDATE ".$_SESSION['project']."PBL SET ID = ".$position." WHERE ID = 9999999";
-				$dbcon->exec($sqlup);
-				foreach($dbcon->query("Select * from ".$_SESSION['project']."PBL where id =".$position)as $row)
-				{
-					if($row['ASA']==$proj->getasa()&&$row['IWANT']==$proj->getiwant()&&$row['INORDERTO']==$proj->getinorderto()){
-						return true;
-					}
-					else{
-						return false;
-					}
+				else{
+					return false;
 				}
 			}
 		}
+	
 
 		public function getlastid(){
 			$dbcon=$this->setUpDB();
 			$sql = "Select * from ".$_SESSION['project']."PBL order by ID desc";
 			foreach($dbcon->query($sql)as $row){
+				return $row['ID'];
+			}
+		}
+		
+		public function getfirstidinpbl(){
+			$dbcon = $this->setUpDB();
+			$sql = "SELECT * FROM ". $_SESSION['project']."PBL WHERE SPRINT = 0 order by id asc";
+			foreach($dbcon->query($sql) as $row){
 				return $row['ID'];
 			}
 		}
@@ -283,11 +310,13 @@
 			 //$item = array("asa", "iwant", "inorderto", "accept", "size", "sprint");
 			 $dbcon = $this->setUpDB();
 			 $backlog = $_SESSION['project']."PBL";
-			 $this -> updateOrder(0);
-			 $us->setid(0);
+			 $newid = $this->getfirstidinpbl();
+			 $newus = 9999998; //this field is to specify that we are adding a new userstory
+			 $this -> updateOrder($newid,$newus);
+			 $us->setid($newid);
 			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT, DONEPERCENT, APPROVED, REASON) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().", ".$us->getdonepercent().", '".$us->getapproved()."', '".$us->getreason()."')";
 			 $dbcon->exec($sql);
-			 foreach($dbcon->query("SELECT * FROM ".$_SESSION['project']."PBL where id = 0")as $row){
+			 foreach($dbcon->query("SELECT * FROM ".$_SESSION['project']."PBL where id = ".$newid)as $row){
 			 	if($row['ASA']==$us->getasa()&&$row['IWANT']==$us->getiwant()&&$row['INORDERTO']==$us->getinorderto()){
 			 		return true;
 			 	}
@@ -324,6 +353,21 @@
 				$pbl = $_SESSION['project'] . "PBL";
 				$sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $sothat . "', ACCEPT='" . $acpt . "', SIZE=" . $size . " WHERE ID=" . $id;
 				$dbcon->exec($sql);
+		}
+		
+		public function moveToSprint($sprintnum, $usid){
+			$dbcon = $this->setUpDB();
+			$pbl = $_SESSION['project']."PBL";
+			$sql = "UPDATE ".$pbl." SET SPRINT = ".$sprintnum." WHERE ID = ".$usid;
+			$dbcon->exec($sql);
+			$sqlcheck = "SELECT * FROM ".$pbl." WHERE ID =".$usid;
+			foreach($dbcon->query($sqlcheck) as $row){
+				if($row['SPRINT']==$sprintnum){
+					return true;
+				}
+				else return false;
+			}
+			
 		}
 	}
 ?>

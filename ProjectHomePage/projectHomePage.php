@@ -54,7 +54,10 @@
 			</tr>
 			<tr>
 				<td>
-					<?php foreach($projectPBL as $pblProj){ ?>
+					<?php
+					foreach($projectPBL as $pblProj){ 
+						if($pblProj->getsprint()==0){
+						?>
 						<div class="card">
 							<div class="container">
 								<?php echo "ID: ".$pblProj->getid();?>
@@ -73,20 +76,19 @@
 							    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
 							    			<input name="Edit" value="Edit" type="Submit">
 		    						</form>								
-									<?php if($pblProj->getid()==0){?>
-										<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
-											<input type = "text" name ="pos" value = "enter position">
-											<input type = "Submit" Value ="Move Item">
-										</form>
-									<?php } ?>
+									<form method = "post" action = "/CS330-Project/editUserStory/adjustOrder_Action.php">
+										<input type = "text" name ="pos" value = "enter position">
+										<input type = "hidden" name ="usid" value = <?php echo "\"".$pblProj->getid()."\""?>>
+										<input type = "Submit" Value ="Move Item">
+									</form>
 								</div>
 							</div>
 						<p></p>
-					<?php } ?>
+					<?php }} ?>
 				</td>
 				<?php 
 					for($i =1; $i<=$numSprints; $i++){?>
-						<td>
+						<td valign ="top">
 						<?php foreach($projectPBL as $pblProj){ 
 					
 							if($pblProj->getSprint()==$i){?>

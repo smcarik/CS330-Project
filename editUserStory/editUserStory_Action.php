@@ -7,7 +7,7 @@ try
 
 	$db = new ContactDB();
 	//$succeed = $db -> Matts db Method
-	
+
 	if(strcmp($_POST ['id'],"")==0 || strcmp($_POST ['asa'],"")==0 ||
 			strcmp($_POST ['iwantto'],"")==0 || strcmp($_POST ['sothat'],"")==0 ||
 			strcmp($_POST ['acpt'],"")==0 || strcmp($_POST ['size'],"")==0){
@@ -15,10 +15,10 @@ try
 		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 	}
 	//remove echos, set this function call equal to variable succeed and continue with checks and redirects.
-	$db->editUserStory(echo $_POST ['id'], echo $_POST ['asa'],
-			echo $_POST ['iwantto'], echo $_POST ['sothat'],
-			echo $_POST ['acpt'], echo $_POST ['size']);
-	
+	$db->editUserStory($_POST ['id'], $_POST ['asa'],
+		 $_POST ['iwantto'], $_POST ['sothat'],
+		 $_POST ['acpt'], $_POST ['size']);
+
 	if($succeed)
 	{
 		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');

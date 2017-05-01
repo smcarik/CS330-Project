@@ -10,7 +10,6 @@ class testPhpUnit extends PHPUnit_Framework_TestCase
 	public function testGetAllProjsForUser()
 	{
 		$db = new ContactDB;
-		$db->addIfUnique("testProj", "description");
 		$_SESSION['project'] = "savage";
 		$this->assertTrue($db->getNumberOfSprints() == 2);
 	}

@@ -109,11 +109,11 @@
 								    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
 								    			<input name="Edit" value="Edit" type="Submit">
 			    						</form>								
-										<?php if($pblProj->getid()==0){?>
-										<?php } 
-								}?>
+										
 								</div>
 							</div>
+							<?php 
+								}?>
 						<p></p>
 					<?php } ?>
 						</td>	

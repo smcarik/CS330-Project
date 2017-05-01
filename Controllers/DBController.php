@@ -112,7 +112,7 @@
 				}
 			}
 		}
-	
+
 
 		public function getlastid(){
 			$dbcon=$this->setUpDB();
@@ -121,7 +121,7 @@
 				return $row['ID'];
 			}
 		}
-		
+
 		public function getfirstidinpbl(){
 			$dbcon = $this->setUpDB();
 			$sql = "SELECT * FROM ". $_SESSION['project']."PBL WHERE SPRINT = 0 order by id asc";
@@ -137,7 +137,7 @@
 				return $row['SPRINT'];
 			}
 		}
-		
+
 		public function getNumOfColsForProj(){
 			return $this->getNumberOfSprints()+1+3;
 		}
@@ -316,7 +316,7 @@
 			 $us->setid($newid);
 			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT, DONEPERCENT, APPROVED, REASON) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().", ".$us->getdonepercent().", '".$us->getapproved()."', '".$us->getreason()."')";
 			 $dbcon->exec($sql);
-			 
+
 		}
 		public function getAllProductBacklogItems(){
 			$dbcon = $this->setUpDB();
@@ -341,22 +341,25 @@
 			return $list;
 		}
 
-		public function editUserStory($id, $asa, $iwant, $sothat, $acpt, $size) {
+		public function editUserStory($id, $asa, $iwant, $inorder, $acpt, $size) {
+				$succeed = true;
 				$dbcon = $this->setUpDB();
 				$pbl = $_SESSION['project'] . "PBL";
-				$sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $sothat . "', ACCEPT='" . $acpt . "', SIZE=" . $size . " WHERE ID=" . $id;
-				$dbcon->exec($sql);
-				foreach($dbcon->query("SELECT * FROM ".$_SESSION['project']."PBL where id = ".$id)as $row){
-					if($row['ASA']==$asa && $row['IWANT']==$iwant && $row['INORDERTO']==$sothat && $row['ACCEPT']==$acpt && $row['SIZE']==$size){
-						return true;
-					}
-					else{
-						return false;
-					}
-				}
-				
+				$sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $inorder . "', ACCEPT='" . $acpt . "', SIZE='" . $size . "' WHERE ID=" . $id;
+				$dbcon->exec($sql) or die($succeed = false);
+				return $succeed;
+				// $sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $sothat . "', ACCEPT='" . $acpt . "', SIZE=" . $size . " WHERE ID=" . $id;
+				// $dbcon->exec($sql);
+				// foreach($dbcon->query("SELECT * FROM ".$_SESSION['project']."PBL where id = ".$id)as $row){
+				// 	if($row['ASA']==$asa && $row['IWANT']==$iwant && $row['INORDERTO']==$sothat && $row['ACCEPT']==$acpt && $row['SIZE']==$size){
+				// 		return true;
+				// 	}
+				// 	else{
+				// 		return false;
+				// 	}
+				// }
 		}
-		
+
 		public function moveToSprint($sprintnum, $usid){
 			$dbcon = $this->setUpDB();
 			$pbl = $_SESSION['project']."PBL";
@@ -369,7 +372,7 @@
 				}
 				else return false;
 			}
-			
+
 		}
 	}
 ?>

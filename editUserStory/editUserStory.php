@@ -17,22 +17,22 @@
 				</tr>
 				<tr>
 					<td>Description:</td>
-					<td>As a 
+					<td>As a
 					<input type="text" name="asa" value= <?php echo $_POST ['asa']?> >
-					
-					I want to/should be able to 
-					
+
+					I want to/should be able to
+
 					<input type="text" name="iwantto" value= <?php echo $_POST ['iwantto']?> >
-					
-					in order to 
-					<input type="text" name="inorder" value= <?php echo $_POST ['sothat']?> >
-					
+
+					in order to
+					<input type="text" name="inorder" value= <?php echo $_POST ['inorder']?> >
+
 					</td>
 				</tr>
 				<tr>
 					<td>Acceptance Criteria:</td>
 					<td>
-					<input type="text" name="accpt" value= <?php echo $_POST ['acpt']?> >
+					<input type="text" name="accpt" value= <?php echo $_POST ['accpt']?> >
 					</td>
 				</tr>
 				<tr>
@@ -45,8 +45,8 @@
 					<td>Location:<br>0:product backlog<br>1:sprint 1<br>etc...</td>
 					<td><input type="text" name="sprint" value ="0" readonly></td>
 				</tr>
-			</tbody>		
-		</table>		
+			</tbody>
+		</table>
 		<input type="submit" value="Edit">
 	</form>
     </body>

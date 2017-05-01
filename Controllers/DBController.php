@@ -112,7 +112,7 @@
 				}
 			}
 		}
-	
+
 
 		public function getlastid(){
 			$dbcon=$this->setUpDB();
@@ -121,7 +121,7 @@
 				return $row['ID'];
 			}
 		}
-		
+
 		public function getfirstidinpbl(){
 			$dbcon = $this->setUpDB();
 			$sql = "SELECT * FROM ". $_SESSION['project']."PBL WHERE SPRINT = 0 order by id asc";
@@ -137,7 +137,7 @@
 				return $row['SPRINT'];
 			}
 		}
-		
+
 		public function getNumOfColsForProj(){
 			return $this->getNumberOfSprints()+1+3;
 		}
@@ -348,13 +348,15 @@
 			return $list;
 		}
 
-		public function editUserStory($id, $asa, $iwant, $sothat, $acpt, $size) {
+		public function editUserStory($id, $asa, $iwant, $inorder, $acpt, $size) {
+				$succeed = true;
 				$dbcon = $this->setUpDB();
 				$pbl = $_SESSION['project'] . "PBL";
-				$sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $sothat . "', ACCEPT='" . $acpt . "', SIZE=" . $size . " WHERE ID=" . $id;
-				$dbcon->exec($sql);
+				$sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $inorder . "', ACCEPT='" . $acpt . "', SIZE='" . $size . "' WHERE ID=" . $id;
+				$dbcon->exec($sql) or die($succeed = false);
+				return $succeed;
 		}
-		
+
 		public function moveToSprint($sprintnum, $usid){
 			$dbcon = $this->setUpDB();
 			$pbl = $_SESSION['project']."PBL";
@@ -367,7 +369,7 @@
 				}
 				else return false;
 			}
-			
+
 		}
 	}
 ?>

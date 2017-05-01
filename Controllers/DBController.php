@@ -387,5 +387,30 @@
 			}
 			return "NONE";
 		}
+
+		public function reject($projName, $uname) {
+			$dbcon = $this->setUpDB();
+			$sql = "DELETE from UserProjectInfo WHERE username = '".$uname."' AND projectName='". $projName ."' AND ACCEPT=-1";
+			$dbcon->exec($sql);
+			$sql = "SELECT * FROM UserProjectInfo WHERE USERNAME='".$uname."' AND projectName='". $projName."'";
+			$isNotEmpty = $dbcon->query($sql);
+			if($isNotEmpty) {
+				return false;
+			}
+			return true;
+		}
+
+		public function accept($projName, $uname) {
+			$dbcon = $this->setUpDB();
+			$sql = "UPDATE UserProjectInfo SET ACCEPT=1 WHERE username = '".$uname."' AND projectName='". $projName."'";
+			$dbcon->exec($sql);
+			$sql = "SELECT * FROM UserProjectInfo WHERE USERNAME='".$uname."' AND projectName='". $projName."'";
+			foreach($dbcon->query($sql) as $row){
+				if($row['ACCEPT']==1){
+					return true;
+				}
+			}
+			return false;
+		}
 	}
 ?>

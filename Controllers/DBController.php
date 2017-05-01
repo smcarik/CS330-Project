@@ -316,14 +316,7 @@
 			 $us->setid($newid);
 			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT, DONEPERCENT, APPROVED, REASON) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().", ".$us->getdonepercent().", '".$us->getapproved()."', '".$us->getreason()."')";
 			 $dbcon->exec($sql);
-			 foreach($dbcon->query("SELECT * FROM ".$_SESSION['project']."PBL where id = ".$newid)as $row){
-			 	if($row['ASA']==$us->getasa()&&$row['IWANT']==$us->getiwant()&&$row['INORDERTO']==$us->getinorderto()){
-			 		return true;
-			 	}
-			 	else{
-			 		return false;
-			 	}
-			 }
+
 		}
 		public function getAllProductBacklogItems(){
 			$dbcon = $this->setUpDB();
@@ -355,6 +348,16 @@
 				$sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $inorder . "', ACCEPT='" . $acpt . "', SIZE='" . $size . "' WHERE ID=" . $id;
 				$dbcon->exec($sql) or die($succeed = false);
 				return $succeed;
+				// $sql = "UPDATE " . $pbl . " SET ASA='" . $asa . "', IWANT='" . $iwant . "', INORDERTO='" . $sothat . "', ACCEPT='" . $acpt . "', SIZE=" . $size . " WHERE ID=" . $id;
+				// $dbcon->exec($sql);
+				// foreach($dbcon->query("SELECT * FROM ".$_SESSION['project']."PBL where id = ".$id)as $row){
+				// 	if($row['ASA']==$asa && $row['IWANT']==$iwant && $row['INORDERTO']==$sothat && $row['ACCEPT']==$acpt && $row['SIZE']==$size){
+				// 		return true;
+				// 	}
+				// 	else{
+				// 		return false;
+				// 	}
+				// }
 		}
 
 		public function moveToSprint($sprintnum, $usid){

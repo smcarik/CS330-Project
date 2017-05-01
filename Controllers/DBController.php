@@ -193,7 +193,7 @@
 			return "NONE";
 		}
 
-		public function registerUser($fName, $lName, $uName, $pWord)
+		public function registerUser($fName, $lName, $uName, $pWord, $podt)
 		{
 			$dbcon = $this->setUpDB();
 			$taken = false;
@@ -214,7 +214,7 @@
 
 				if(!$taken)
 				{
-					$sql = "INSERT INTO UserInfo (FNAME, LNAME, PASSWORD, USERNAME) VALUES ('" . $fName . "', '"  . $lName  . "', '"  . $pWord  . "', '"  . $uName  . "')";
+					$sql = "INSERT INTO UserInfo (FNAME, LNAME, PASSWORD, USERNAME, PODT) VALUES ('" . $fName . "', '"  . $lName  . "', '"  . $pWord  . "', '"  . $uName  . "', '" . $podt . "')";
 					$dbcon->exec($sql);
 					return true;
 				}

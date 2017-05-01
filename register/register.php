@@ -18,7 +18,7 @@
 		try { 
 			$db = new ContactDB;
 			$sql = "SELECT * FROM UserInfo";
-			$registered = $db->registerUser($_POST["fname"],$_POST["lname"],$_POST["user"],$_POST["pass"]);
+			$registered = $db->registerUser($_POST["fname"],$_POST["lname"],$_POST["user"],$_POST["pass"],$_POST["PODT"]);
 		} 
 		catch(PDOException $e) {
 			echo "Connection Failed: " . $e->getMessage();

@@ -1,6 +1,8 @@
 <?php
 	include __DIR__.'\..\Users\UserInfo.php';
 	include __DIR__.'\..\Projects\projectinfo.php';
+	include __DIR__.'\..\Projects\taskInfo.php';
+	
 	session_start();
 	class ContactDB
 	{
@@ -49,6 +51,16 @@
 							REASON LONGTEXT DEFAULT NULL,
 							PRIMARY KEY (ID))";
 					$dbcon->exec($sql1);
+					$sql2 = "CREATE TABLE ".$newProjectName."TASKS 
+							(USID INT NOT NULL,
+							TID INT NOT NULL AUTO_INCREMENT,
+							DESCRIPTION LONGTEXT NOT NULL,
+							SPRINT INT NOT NULL,
+							TASKLOC INT NOT NULL,
+							PERCENT INT NOT NULL,
+							MEMBER LONGTEXT NOT NULL,
+							PRIMARY KEY(TID, USID))";
+					$dbcon->exec($sql2);
 					return true;
 				}
 			}
@@ -462,6 +474,34 @@
 				}
 			}
 			return false;
+		}
+		
+		public function addTask($task){
+			$dbcon = $this->setUpDB();
+			$sql = "INSERT INTO ".$_SESSION['project']."TASKS (USID, DESCRIPTION, SPRINT, TASKLOC, PERCENT, MEMBER) VALUES (".$task->getusid().", '".$task->getdesc()."', ".$task->getsprint().", ".$task->gettaskloc().", ".$task->getperc().", '".$task->getmember()."')";
+			$checkperc = $this->gettotalpercent($task->getusid());
+			if($checkperc + $task->getperc()> 100){
+				$_SESSION['Error'] = "Percent will exceed 100";
+				return -2;
+			}
+			$dbcon->exec($sql);
+			$sqlcheck = "SELECT * FROM ".$_SESSION['project']."TASKS WHERE USID = ".$task->getusid();
+			foreach($dbcon->query($sqlcheck) as $row){
+				if($row['DESCRIPTION'] == $task->getdesc()){
+					return 1;
+				}
+			}
+			return -1;
+		}
+		
+		public function gettotalpercent($usid){
+			$dbcon = $this->setUpDB();
+			$sql = "SELECT * FROM ".$_SESSION['project']."TASKS where USID = ".$usid;
+			$totalperc = 0;
+			foreach($dbcon->query($sql) as $row){
+				$totalperc = $totalperc = $row['PERCENT'];
+				}
+				return $totalperc;
 		}
 	}
 ?>

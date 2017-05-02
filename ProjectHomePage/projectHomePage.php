@@ -124,6 +124,14 @@
 								    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
 								    			<input name="Edit" value="Edit" type="Submit">
 			    						</form>
+			    						<?php } if($_SESSION['Role'] == 1){?>
+			    							<br>
+			    							<form method = "POST" action = "/CS330-Project/CreateNewTasks/CreateNewTask.php">
+			    								<input type = "hidden" name = "usid" value = <?php echo "\"".$pblProj->getid()."\""?>>
+			    								<input type = "hidden" name = "sprint" value = <?php echo "\"".$pblProj->getsprint()."\""?>>
+			    								<input type = "Submit" value = "Create Task for User Story">
+			    							</form>
+			    						
 			    						<?php }?>
 
 								</div>

@@ -13,7 +13,7 @@ class testPhpUnit extends PHPUnit_Framework_TestCase {
 		$db->setUpDB();
 		$db->inviteToProject("adam", "RitsBits");
 		$b1 = $db->reject("RitsBits", "adam");
-		$this->assertTrue($b1);
+		$this->assertTrue(!$b1);
 	}
 	public function testAccept()
 	{
@@ -21,7 +21,7 @@ class testPhpUnit extends PHPUnit_Framework_TestCase {
 		$db->setUpDB();
 		$db->inviteToProject("adam", "erin");
 		$b2 = $db->reject("erin", "adam");
-		$this->assertTrue($b2);
+		$this->assertTrue(!$b2);
 	}
 }
 ?>

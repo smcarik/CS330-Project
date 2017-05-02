@@ -142,8 +142,44 @@
 					<?php } ?>
 						</td>
 				<?php }?>
+				<!-- Section for tasks -->
+				<?php
+					$tasklist = $db->getTasks();
+					for($i =1; $i<=$numSprints; $i++){?>
+						<td valign ="top">
+						<?php foreach($tasklist as $task){
 
+							if($task['SPRINT']==$i){ ?>
+
+							<div class="card">
+								<div class="container">
+									<?php echo "Task ID: ".$task['USID']."-".$task['TID'];?>
+									<br><br>
+									<?php echo "Description: ".$task['DESCRIPTION'];?>
+										<br><br>
+										<?php if($task['TASKLOC']==0){echo "Task status: TO DO";}
+											elseif($task['TASKLOC']==1){echo "Task status: IN PROGRESS";}
+											else{echo "Task status: COMPLETED";}
+										?>
+										<br><br>
+										<?php echo "Percent: ".$task['PERCENT'];?>
+										<br><br>
+										
+			    						<?php echo "Member: ".$task['MEMBER'];?>
+			    						<br>
+								</div>
+							</div>
+							<?php
+								}?>
+						<p></p>
+					<?php } ?>
+						</td>
+				<?php }?>
+				<!-- Section for tasks -->
 			</tr>
+			
+			
+				
 			<tr>
 				<td>
 				<?php if($_SESSION['Role']==0){?>
@@ -183,5 +219,6 @@
 		</tbody>
 	</table>
 	<button onclick="window.location.href='/../CS330-Project/UserHomePage/userHomePage.php'">Back</button>
+	<?php echo $db->gettotalpercent(1);?>
 </body>
 </html>

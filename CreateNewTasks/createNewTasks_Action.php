@@ -11,6 +11,14 @@ try{
 		$_SESSION['Error'] = "Percent exceeded 100";
 		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 	}
+	elseif($output == -3){
+		$_SESSION['Error'] = "Unable to assign memeber to task";
+		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
+	}
+	elseif($output == -4){
+		$_SESSION['Error'] == "Unable to assign product owner to tasks";
+		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
+	}
 	elseif($output == 1){
 		header('Location: /CS330-Project/ProjectHomePage/projectHomePage.php');
 	}

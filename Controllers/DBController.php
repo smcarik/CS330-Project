@@ -481,8 +481,13 @@
 			$sql = "INSERT INTO ".$_SESSION['project']."TASKS (USID, DESCRIPTION, SPRINT, TASKLOC, PERCENT, MEMBER) VALUES (".$task->getusid().", '".$task->getdesc()."', ".$task->getsprint().", ".$task->gettaskloc().", ".$task->getperc().", '".$task->getmember()."')";
 			$checkperc = $this->gettotalpercent($task->getusid());
 			if($checkperc + $task->getperc()> 100){
-				$_SESSION['Error'] = "Percent will exceed 100";
 				return -2;
+			}
+			if(!$this->doesUsernameExist($task->getmember()) || !$this->isProjectMember($task->getmember(),$_SESSION['project'])){
+				return -3;
+			}
+			if($this->getusersrole($task->getmember())==0){
+				return -4;
 			}
 			$dbcon->exec($sql);
 			$sqlcheck = "SELECT * FROM ".$_SESSION['project']."TASKS WHERE USID = ".$task->getusid();
@@ -499,9 +504,29 @@
 			$sql = "SELECT * FROM ".$_SESSION['project']."TASKS where USID = ".$usid;
 			$totalperc = 0;
 			foreach($dbcon->query($sql) as $row){
-				$totalperc = $totalperc = $row['PERCENT'];
+				$totalperc = $totalperc + $row['PERCENT'];
 				}
 				return $totalperc;
+		}
+		
+		public function getTasks() {
+			$dbcon = $this->setUpDB();
+			$sql = "SELECT * from ".$_SESSION['project']."TASKS";
+			try{
+				return $dbcon->query($sql);
+			}
+			catch(PDOException $e) {
+				echo "Connection Failed: " . $e->getMessage();
+			}
+			return "NONE";
+		}
+		
+		public function getusersrole($username){
+			$dbcon = $this->setUpDB();
+			$sql = "SELECT * FROM UserInfo WHERE USERNAME='".$username."'";
+			foreach($dbcon->query($sql) as $row){
+				return $row['ROLE'];
+			}
 		}
 	}
 ?>

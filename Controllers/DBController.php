@@ -223,7 +223,7 @@
 
 				if(!$taken)
 				{
-					$sql = "INSERT INTO UserInfo (FNAME, LNAME, PASSWORD, USERNAME, PODT) VALUES ('" . $fName . "', '"  . $lName  . "', '"  . $pWord  . "', '"  . $uName  . "', '" . $podt . "')";
+					$sql = "INSERT INTO UserInfo (FNAME, LNAME, PASSWORD, USERNAME, ROLE) VALUES ('" . $fName . "', '"  . $lName  . "', '"  . $pWord  . "', '"  . $uName  . "', '" . $podt . "')";
 					$dbcon->exec($sql);
 					return true;
 				}

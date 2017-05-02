@@ -11,10 +11,10 @@ class testPhpUnit extends PHPUnit_Framework_TestCase {
 	{
 		$db = new ContactDB;
 		$db->setUpDB();
-		$db->inviteToProject("adam", "savage");
-		$b1 = $db->reject("savage", "adam");
-		$db->inviteToProject("adam", "savage");
-		$b2 = $db->accept("savage", "adam");
+		$db->inviteToProject("adam", "BourneJason");
+		$b1 = $db->reject("BourneJason", "adam");
+		$db->inviteToProject("adam", "BourneJason");
+		$b2 = $db->accept("BourneJason", "adam");
 		$this->assertTrue($b1&&$b2);
 	}
 }

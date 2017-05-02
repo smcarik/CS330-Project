@@ -333,7 +333,6 @@
 			 	$this->addUserToProject($username,$proj, -1);
 				return true;
 			 }
-
 		}
 		
 		public function addItemToBacklog($us){

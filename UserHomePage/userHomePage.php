@@ -55,11 +55,14 @@
    	    	<?php
    	    	}?>
    	    </table>
-    <!-- </form> -->
-	<form method="POST" action="\CS330-Project\createProject\createProject.php">
-		<input name="Create new Project" value = "Create New Project" type="Submit">
-	</form>
-	<button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php">Invite</button>
-
+   	<?php if($_SESSION['Role']==0){?>
+		<form method="POST" action="\CS330-Project\createProject\createProject.php">
+			<input name="Create new Project" value = "Create New Project" type="Submit">
+		</form>
+	<?php } else{?>
+		<form method="POST" action="\CS330-Project\createProject\createProject.php">
+			<input name="Create new Project" value = "Create New Project" type="Submit" disabled> Project creation reserved for product owners
+		</form>
+	<?php }?>
     </body>
 </html>

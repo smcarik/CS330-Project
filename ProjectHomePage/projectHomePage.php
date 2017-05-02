@@ -68,12 +68,14 @@
 						<div class="card">
 							<div class="container">
 								<?php echo "ID: ".$pblProj->getid();?>
-								<br>
-								<?php echo "Size: ".$pblProj->getsize()?>
-									<br>
-									<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
-									<br>
-									<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
+								<br><br>
+								<?php echo "Size: ".$pblProj->getsize();?>
+									<br><br>
+									<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto();?>
+									<br><br>
+									<?php echo "Acceptance Criteria: ".$pblProj->getaccept();
+										if($_SESSION['Role']==0){
+									?><br><br>
 									<form method="POST" action="/CS330-Project/editUserStory/editUserStory.php">
 							    			<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
 							    			<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
@@ -88,6 +90,7 @@
 										<input type = "hidden" name ="usid" value = <?php echo "\"".$pblProj->getid()."\""?>>
 										<input type = "Submit" Value ="Move Item">
 									</form>
+									<?php }?>
 								</div>
 							</div>
 						<p></p>
@@ -103,12 +106,15 @@
 							<div class="card">
 								<div class="container">
 									<?php echo "ID: ".$pblProj->getid();?>
-									<br>
-									<?php echo "Size: ".$pblProj->getsize()?>
-										<br>
-										<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto()?>
-										<br>
-										<?php echo "Acceptance Criteria: ".$pblProj->getaccept()?>
+									<br><br>
+									<?php echo "Size: ".$pblProj->getsize();?>
+										<br><br>
+										<?php echo "As a ".$pblProj->getasa()." I want to ".$pblProj->getiwant()." so that ".$pblProj->getinorderto();?>
+										<br><br>
+										<?php echo "Acceptance Criteria: ".$pblProj->getaccept();
+											if($_SESSION['Role']==0) {
+										?>
+										<br><br>
 										<form method="POST" action="/CS330-Project/editUserStory/editUserStory.php">
 								    			<input type="hidden" name="ID" value=<?php echo "\"".$pblProj->getid()."\""?>>
 								    			<input type="hidden" name="asa" value=<?php echo "\"".$pblProj->getasa()."\""?>>
@@ -118,6 +124,7 @@
 								    			<input type="hidden" name="size" value=<?php echo "\"".$pblProj->getsize()."\""?>>
 								    			<input name="Edit" value="Edit" type="Submit">
 			    						</form>
+			    						<?php }?>
 
 								</div>
 							</div>
@@ -131,18 +138,34 @@
 			</tr>
 			<tr>
 				<td>
+				<?php if($_SESSION['Role']==0){?>
 					<form method="POST"
 						action="/CS330-Project/CreateUserStory/CreateNewUS.php">
 						<input type="Submit" value="create new user story"
 							name="create new user story">
 					</form>
+				<?php } else { ?>
+					<form method="POST"
+						action="/CS330-Project/CreateUserStory/CreateNewUS.php">
+						<input type="Submit" value="create new user story" name="create new user story" disabled>
+						<br>Creation of User Stories reserved for Product Owners
+					</form>
+					<?php }?>
 				</td>
 				<?php for($j =1; $j<=$numSprints; $j++){?>
 				<td>
+				<?php if($_SESSION['Role']==1){?>
 					<form method = "POST" action = "/CS330-Project/MoveItemsToSprints/moveItemToSBL.php">
 						<input type = "hidden" name = "sprintnum" value = <?php echo "\"".$j."\""?>>
 						<input type = "Submit" value = "Pull item from pbl">
 					</form>
+				<?php } else {?>
+					<form method = "POST" action = "/CS330-Project/MoveItemsToSprints/moveItemToSBL.php">
+						<input type = "hidden" name = "sprintnum" value = <?php echo "\"".$j."\""?>>
+						<input type = "Submit" value = "Pull item from pbl" disabled>
+						<br>Developers may only commit Items to sprints
+					</form>
+				<?php }?>
 				</td>
 				<?php }?>
 				<td><button onclick="window.location.href='/../CS330-Project/inviteToProject/invites.php'">Invite User to Project</button></td>

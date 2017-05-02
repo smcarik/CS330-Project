@@ -20,8 +20,8 @@ class testPhpUnit extends PHPUnit_Framework_TestCase {
 		$db = new ContactDB;
 		$db->setUpDB();
 		$db->inviteToProject("adam", "erin");
-		$b2 = $db->reject("erin", "adam");
-		$this->assertTrue(!$b2);
+		$b2 = $db->accept("erin", "adam");
+		$this->assertTrue($b2);
 	}
 }
 ?>

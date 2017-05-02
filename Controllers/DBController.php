@@ -63,7 +63,7 @@
 			
 			//this if statement is for newly created User stories, takes all items in pbl and decrements then inserts new item.
 			if($usid == 9999998){
-				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL where ID>=".$position." order by ID desc";
+				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL where ID>=".$position." && SPRINT=0 order by ID desc";
 				if($dbcon->query($sql0)){
 					foreach($dbcon->query($sql0)as $row){
 						$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
@@ -124,7 +124,10 @@
 			$dbcon=$this->setUpDB();
 			$sql = "Select * from ".$_SESSION['project']."PBL order by ID desc";
 			foreach($dbcon->query($sql)as $row){
-				return $row['ID'];
+				if($row['ID']==0){
+					return 1;}
+				else{
+					return $row['ID'];}
 			}
 		}
 
@@ -343,6 +346,12 @@
 			 if($newid == null){
 			 	$newid = $this->getlastid();
 			 }
+			 if($newid == null){
+			 	$newid = 0;
+			 }
+			 if($newid == $this->getlastid()){
+			 	$newid = $newid + 1;
+			 }
 			 $newus = 9999998; //this field is to specify that we are adding a new userstory
 			 $this -> updateOrder($newid,$newus);
 			 $us->setid($newid);
@@ -401,6 +410,9 @@
 		}
 
 		public function moveToSprint($sprintnum, $usid){
+			if($usid == null){
+				return false;
+			}
 			$dbcon = $this->setUpDB();
 			$pbl = $_SESSION['project']."PBL";
 			$sql = "UPDATE ".$pbl." SET SPRINT = ".$sprintnum." WHERE ID = ".$usid;

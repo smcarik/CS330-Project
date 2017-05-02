@@ -240,6 +240,7 @@
 					}
 
 				}
+				return false;
 			}
 			catch(PDOException $e) {
 				echo "Connection Failed: " . $e->getMessage();
@@ -308,7 +309,6 @@
 		}
 
 		public function addItemToBacklog($us){
-			 //$item = array("asa", "iwant", "inorderto", "accept", "size", "sprint");
 			 $dbcon = $this->setUpDB();
 			 $backlog = $_SESSION['project']."PBL";
 			 $newid = $this->getfirstidinpbl();
@@ -317,6 +317,14 @@
 			 $us->setid($newid);
 			 $sql = "INSERT INTO ".$backlog." (ID, ASA, IWANT, INORDERTO, ACCEPT, SIZE, SPRINT, DONEPERCENT, APPROVED, REASON) VALUES (".$us->getid().", '".$us->getasa()."', '".$us->getiwant()."', '".$us->getinorderto()."', '".$us->getaccept()."', '".$us->getsize()."', ".$us->getsprint().", ".$us->getdonepercent().", '".$us->getapproved()."', '".$us->getreason()."')";
 			 $dbcon->exec($sql);
+			 
+			 $sqlcheck = "SELECT * FROM ".$backlog." WHERE ID = ".$newid;
+			 foreach($dbcon->query($sqlcheck) as $row){
+			 	if($row['ASA']==$us->getasa()&&$row['IWANT']==$us->getiwant()&&$row['INORDERTO']==$us->getinorderto() && $row['ACCEPT']==$us->getaccept() && $row['SIZE']==$us->getsize()){
+			 		return true;
+			 	}
+			 	else return false;
+			}
 
 		}
 		public function getAllProductBacklogItems(){

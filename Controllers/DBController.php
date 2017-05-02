@@ -305,9 +305,10 @@
 			else{
 				foreach($dbcon->query($sql) as $row){
 					if(strcmp($row["PASSWORD"], $password) == 0 && strcmp($row['USERNAME'],$username)==0) {
-						$useri = new User($row['FNAME'],$row['LNAME'],$row['USERNAME']);
+						$useri = new User($row['FNAME'],$row['LNAME'],$row['USERNAME'], $row["PODT"]);
 						$_SESSION['User'] = $useri;
 						$_SESSION['Error'] = "none";
+						$_SESSION['Role'] = $useri->getRole();
 						return true;
 					}
 					else{

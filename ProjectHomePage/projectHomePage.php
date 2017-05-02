@@ -49,7 +49,10 @@
 		<tbody>
 			<tr>
 				<td>Product Backlog</td>
-				<?php for($i =1; $i<=$numSprints; $i++){
+				<?php if($numSprints==0){
+					$numSprints=1;
+				}
+					for($i =1; $i<=$numSprints; $i++){
 						 echo "<td>Sprint #".$i. " Backlog</td>";
 						}?>
 				<td>Tasks To Do</td>

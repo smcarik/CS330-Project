@@ -60,13 +60,19 @@
 		public function updateOrder($position, $usid){
 			$dbcon = $this->setUpDB();
 			$proj;
+			
 			//this if statement is for newly created User stories, takes all items in pbl and decrements then inserts new item.
 			if($usid == 9999998){
 				$sql0 = "SELECT * FROM ".$_SESSION['project']."PBL where ID>=".$position." order by ID desc";
-				foreach($dbcon->query($sql0)as $row){
-					$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
-					$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($us->getid()+1)." WHERE ID = ".$us->getid();
-					$dbcon->exec($sqlu);
+				if($dbcon->query($sql0)){
+					foreach($dbcon->query($sql0)as $row){
+						$us = new UserStoryInfo($row['ID'],$row['ASA'],$row['IWANT'],$row['INORDERTO'],$row['ACCEPT'],$row['SIZE'],$row['SPRINT'],$row['DONEPERCENT'],$row['APPROVED'],$row['REASON']);
+						$sqlu = "UPDATE ".$_SESSION['project']."PBL SET ID = ".($us->getid()+1)." WHERE ID = ".$us->getid();
+						$dbcon->exec($sqlu);
+					}
+				}
+				else{
+					return;
 				}
 			}
 			// this section is for if a user tries to move user story up, we are not allowing that right now
@@ -329,11 +335,14 @@
 			 }
 
 		}
-
+		
 		public function addItemToBacklog($us){
 			 $dbcon = $this->setUpDB();
 			 $backlog = $_SESSION['project']."PBL";
 			 $newid = $this->getfirstidinpbl();
+			 if($newid == null){
+			 	$newid = $this->getlastid();
+			 }
 			 $newus = 9999998; //this field is to specify that we are adding a new userstory
 			 $this -> updateOrder($newid,$newus);
 			 $us->setid($newid);

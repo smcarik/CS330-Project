@@ -15,7 +15,11 @@
     $db = new ContactDB;
     $projectNames = $db->getAllProjectsForUser($user);
     $pending = $db->viewPending($user);
-    echo "<h2> Welcome, $user, to the user home page. </h2>"
+    echo "<h2> Welcome, $user, to the user home page. </h2>";
+    $asshole = $_SESSION['User'];
+    if($asshole->getRole() == 1){
+    	echo "role: Developer";}
+    else {"role: Product Owner";}
     ?>
    <!-- <form method="POST" action="/CS330-Project/ProjectHomePage/projectHomePage.php"> -->
    <h3> Here are the projects that you are a member of: </h3>

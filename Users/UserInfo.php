@@ -5,10 +5,11 @@
 		var $uname = null;
 		var $role = null;
 		
-		public function __construct($fn,$ln,$un){
+		public function __construct($fn,$ln,$un, $rol){
 			$this->fname = $fn;
 			$this->lname = $ln;
 			$this->uname = $un;
+			$this->role = $rol;
 		}
 		
 		public function setFName($fn){

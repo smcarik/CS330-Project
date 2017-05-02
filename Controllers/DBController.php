@@ -235,12 +235,10 @@
 			try{
 				$dbcon = $this->setUpDB();
 				foreach($dbcon->query($sql) as $row){
-					if(strcmp($row["username"], $username) == 0 && strcmp($row["projectName"], $project) == 0){
+					if(strcmp($row["username"], $username) == 0 && strcmp($row["projectName"], $project) == 0 && strcmp($row['ACCEPT'],1)==0){
 						return true;
 					}
-
 				}
-				return false;
 			}
 			catch(PDOException $e) {
 				echo "Connection Failed: " . $e->getMessage();
@@ -248,6 +246,27 @@
 			return false;
 		}
 
+		public function invitableForPending($username, $project){
+			$sql = "SELECT * FROM UserProjectInfo";
+			if(!$this->doesUsernameExist($username)){
+				$_SESSION['Error'] = "Username: ".$username." does not exist";
+				return false;
+			}
+			try{
+				$dbcon = $this->setUpDB();
+				foreach($dbcon->query($sql) as $row){
+					if(strcmp($row["username"], $username) == 0 && strcmp($row["projectName"], $project) == 0 && strcmp($row['ACCEPT'],-1)==0){
+						$_SESSION['Error']="User already has a pending invitation for this project";
+						return false;
+					}
+				}
+			}
+			catch(PDOException $e){
+				echo $e;
+			}
+			return true;
+		}
+		
 		public function doesUsernameExist($username){
 			$dbcon = $this->setUpDB();
 			$sql = "SELECT * FROM UserInfo";
@@ -299,6 +318,9 @@
 
 			 if($this->isProjectMember($username, $proj)){
 			 	$_SESSION['Error'] = "Invitee is a part of project";
+			 	return false;
+			 }
+			 elseif(!$this->invitableForPending($username, $proj)){
 			 	return false;
 			 }
 			 else{
